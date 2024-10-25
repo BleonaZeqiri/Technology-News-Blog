@@ -5,6 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Technology News Blog</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
   </head>
-  <body></body>
+  <body>
+    <div class="header-top">
+      <div class="container">
+        <div class="header-row">
+          <div class="header-info-left">
+            <ul>
+              <li>
+                <img src="images/home/header_icon1.png" alt="" />34ºc, Sunny
+              </li>
+              <li>
+                <img src="images/home/header_icon2.png" alt="" />Tuesday, 18th
+                June, 2019
+              </li>
+            </ul>
+          </div>
+          <div class="header-info-right">
+            <ul class="header-social">
+              <li>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-bottom">
+      <div class="container">
+        <div class="header-flex">
+          <div class="logo">
+            <a href="index.html"
+              ><img src="images/home/logo.svg" alt="Logo"
+            /></a>
+          </div>
+          <div class="hamburger" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+          </div>
+          <div class="mobile-menu" id="mobileMenu">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li>
+                <a href="#">Articles</a>
+                <ul class="megamenu">
+                  <li><a href="elements.html">Element</a></li>
+                  <li><a href="blog.html">Blog</a></li>
+                  <li><a href="single-blog.html">Blog Details</a></li>
+                  <li><a href="details.html">Category Details</a></li>
+                </ul>
+              </li>
+              <li><a href="categori.html"> About</a></li>
+            </ul>
+            <div class="header-right-btn">
+              <div class="search-box">
+                <input type="text" placeholder="Search" />
+                <i class="fas fa-search special-tag"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /// -->
+
+    <script src="main.js"></script>
+  </body>
 </html>
