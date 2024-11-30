@@ -128,49 +128,52 @@
 
         <div class="contactForm">
           <h2>Send a Message</h2>
-          <div class="formBox">
-            <div class="inputBox w50">
-              <input
-                type="text"
-                name=""
-                id=""
-                required
-                placeholder="First Name"
-              />
+          <form id="contactForm">
+            <div class="formBox">
+              <div class="inputBox w50">
+                <input
+                  type="text"
+                  id="firstName"
+                  placeholder="First Name"
+                  required
+                />
+                <span class="error" id="firstNameError"></span>
+              </div>
+              <div class="inputBox w50">
+                <input
+                  type="text"
+                  id="lastName"
+                  placeholder="Last Name"
+                  required
+                />
+                <span class="error" id="lastNameError"></span>
+              </div>
+              <div class="inputBox w50">
+                <input type="email" id="email" placeholder="Email" required />
+                <span class="error" id="emailError"></span>
+              </div>
+              <div class="inputBox w50">
+                <input
+                  type="tel"
+                  id="mobile"
+                  placeholder="Mobile Number"
+                  required
+                />
+                <span class="error" id="mobileError"></span>
+              </div>
+              <div class="inputBox w100">
+                <textarea
+                  id="message"
+                  placeholder="Write Your Message Here."
+                  required
+                ></textarea>
+                <span class="error" id="messageError"></span>
+              </div>
+              <div class="inputBox w100">
+                <input type="submit" value="Submit" class="submit" />
+              </div>
             </div>
-            <div class="inputBox w50">
-              <input
-                type="text"
-                name=""
-                id=""
-                placeholder="Last Name"
-                required
-              />
-            </div>
-            <div class="inputBox w50">
-              <input type="email" name="" id="" placeholder="Email" required />
-            </div>
-            <div class="inputBox w50">
-              <input
-                type="text"
-                name=""
-                id=""
-                placeholder="Mobile Number"
-                required
-              />
-            </div>
-            <div class="inputBox w100">
-              <textarea
-                name=""
-                id=""
-                placeholder="Write Your Message Here."
-                required
-              ></textarea>
-            </div>
-            <div class="inputBox w100">
-              <input type="submit" value="Submit" class="submit" />
-            </div>
-          </div>
+          </form>
         </div>
       </div>
     </section>

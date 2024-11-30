@@ -4,10 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Technology News Blog</title>
-    <link rel="stylesheet" href="style/login.css" />
-    <link rel="stylesheet" href="style/forgotpassword.css" />
-
+    <link rel="stylesheet" href="style/signup.css" />
     <link rel="stylesheet" href="style/style.css" />
+    <link rel="stylesheet" href="style/login.css" />
 
     <link
       rel="stylesheet"
@@ -15,36 +14,47 @@
     />
   </head>
   <body>
-    <section class="forgotpassword">
-      <div class="forgotpassword-wrap">
-        <div class="forgotpassword-html">
-          <h2>Password recovery</h2>
-          <form>
-            <div class="forgotpassword-form">
+    <section class="signup">
+      <div class="signup-wrap">
+        <div class="signup-html">
+          <h2>Sign Up</h2>
+          <form id="signupForm">
+            <div class="signup-form">
               <div class="sign-in-htm">
                 <div class="group">
-                  <label for="user" class="label"
-                    >Enter your email address and we will send you a link to
-                    change your password.</label
-                  >
-                  <input
-                    id="user"
-                    type="email"
-                    class="input"
-                    placeholder="Email address"
-                  />
+                  <label for="username" class="label">Username</label>
+                  <input id="username" type="text" class="input" required />
+                  <span id="usernameError" class="error-message"></span>
+                </div>
+
+                <div class="group">
+                  <label for="email" class="label">Email</label>
+                  <input id="email" type="email" class="input" required />
+                  <span id="emailError" class="error-message"></span>
+                </div>
+
+                <div class="group">
+                  <label for="password" class="label">Password</label>
+                  <input id="password" type="password" class="input" required />
+                  <span id="passwordError" class="error-message"></span>
+                </div>
+
+                <div class="groupe">
+                  <input id="remember" type="checkbox" class="check" checked />
+                  <label for="remember"> Remember me</label>
                 </div>
 
                 <div class="submit">
                   <div class="foot-lnk">
-                    <a href="login.html" class="a">Log in now</a>
+                    <a href="forgotpassword.html" class="a">Forgot Password?</a>
                   </div>
-                  <input type="submit" class="button" value="Send" />
+                  <input type="submit" class="button" value="Sign Up" />
                 </div>
+
                 <div class="hr"></div>
                 <div class="foot-lnk">
-                  <a href="signup.html" class="a"
-                    >Are you registered? Register now!</a
+                  <a href="login.html" class="a"
+                    >Are you registered? Log in now</a
                   >
                 </div>
               </div>
@@ -59,10 +69,7 @@
         <div class="row">
           <div class="col-md-3 firs-row">
             <a href="index.html"
-              ><img
-                src="images/home/logo.svg"
-                alt=""
-                class="img-fluid logo-footer"
+              ><img src="images/logo.svg" alt="" class="img-fluid logo-footer"
             /></a>
             <div class="footer-about">
               <p class="footer-paragraph">
@@ -127,8 +134,8 @@
               />
               <div class="address-links">
                 <li class="address1">
-                  <i class="fa-solid fa-location-dot"></i> Kolathur ramankulam-
-                  Malappuram Dt Kerala 679338
+                  <i class="fa-solid fa-location-dot"></i> Klan Kosova,
+                  M529+63M, Hyzri Talla, Prishtina 10000
                 </li>
                 <li>
                   <a href=""
