@@ -160,3 +160,14 @@
 .contactus_span:hover {
   color: white;
 }
+@media (max-width: 900px) {
+  .contactInfo {
+    position: unset;
+    top: 80px;
+    width: 100%;
+  }
+  .contactForm {
+    padding-left: 50px;
+    margin-left: 0px;
+  }
+}

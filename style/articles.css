@@ -48,3 +48,8 @@ hr {
   display: table;
   clear: both;
 }
+@media (max-width: 900px) {
+  .articles {
+    flex-wrap: wrap;
+  }
+}
