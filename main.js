@@ -68,3 +68,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+//date
+const dateElement = document.getElementById("currentDate");
+const options = {
+  weekday: "long",
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+};
+const currentDate = new Date().toLocaleDateString("en-US", options);
+
+dateElement.innerHTML = `<img src="images/home/header_icon2.png" alt="" /> ${currentDate}`;

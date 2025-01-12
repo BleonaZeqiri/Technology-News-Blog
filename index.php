@@ -1,3 +1,9 @@
+<?php 
+session_start();
+
+if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,9 +28,10 @@
                 <img src="images/home/header_icon1.png" alt="" />34ºc, Sunny
               </li>
               <li>
-                <img src="images/home/header_icon2.png" alt="" />Tuesday, 18th
-                June, 2019
+                <div id="currentDate"></div>
               </li>
+              <h1>Hello, <?php echo $_SESSION['name']; ?></h1>
+
             </ul>
           </div>
           <div class="header-info-right">
@@ -48,7 +55,7 @@
       <div class="container">
         <div class="header-flex">
           <div class="logo">
-            <a href="index.html"
+            <a href="index.php"
               ><img src="images/home/logo.svg" alt="Logo"
             /></a>
           </div>
@@ -57,11 +64,12 @@
           </div>
           <div class="mobile-menu" id="mobileMenu">
             <ul>
-              <li><a href="index.html">Home</a></li>
+              <li><a href="index.php">Home</a></li>
               <li>
-                <a href="articles.html">Articles</a>
+                <a href="articles.php">Articles</a>
               </li>
-              <li><a href="contact-us.html"> Contact Us</a></li>
+              <li><a href="contact-us.php"> Contact Us</a></li>
+              <li><a href="admin/index.php">  Login</a></li>
             </ul>
             <div class="header-right-btn">
               <div class="search-box">
@@ -105,7 +113,7 @@
                   </div>
                 </div>
               </a>
-              <a href="singel-page.html">
+              <a href="singel-page.php">
                 <div class="portrait-card">
                   <div class="portrait-news-content">
                     <img
@@ -189,7 +197,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-3 firs-row">
-            <a href="index.html"
+            <a href="index.php"
               ><img
                 src="images/home/logo.svg"
                 alt=""
@@ -210,17 +218,17 @@
               <br />
               <div class="use-links">
                 <li>
-                  <a href="index.html"
+                  <a href="index.php"
                     ><i class="fa-solid fa-angles-right"></i> Home</a
                   >
                 </li>
                 <li>
-                  <a href="articles.html"
+                  <a href="articles.php"
                     ><i class="fa-solid fa-angles-right"></i> Articles</a
                   >
                 </li>
                 <li>
-                  <a href="contact-us.html"
+                  <a href="contact-us.php"
                     ><i class="fa-solid fa-angles-right"></i> Contact Us</a
                   >
                 </li>
@@ -287,3 +295,9 @@
     <script src="main.js"></script>
   </body>
 </html>
+<?php 
+}else{
+     header("Location: index.php");
+     exit();
+}
+ ?>

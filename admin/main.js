@@ -77,16 +77,3 @@ document.getElementById("loginForm")?.addEventListener("submit", function (e) {
     document.getElementById("loginForm").reset();
   }
 });
-//forgot password
-document
-  .getElementById("forgotPasswordForm")
-  .addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const email = document.getElementById("user").value.trim();
-
-    if (email) {
-      alert(`A password reset link has been sent to ${email}.`);
-      document.getElementById("forgotPasswordForm").reset();
-    }
-  });

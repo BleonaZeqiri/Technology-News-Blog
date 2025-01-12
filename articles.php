@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Technology News Blog</title>
+    <link rel="stylesheet" href="style/articles.css" />
     <link rel="stylesheet" href="style/style.css" />
-    <link rel="stylesheet" href="style/contact-us.css" />
 
     <link
       rel="stylesheet"
@@ -48,7 +48,7 @@
       <div class="container">
         <div class="header-flex">
           <div class="logo">
-            <a href="index.html"
+            <a href="index.php"
               ><img src="images/home/logo.svg" alt="Logo"
             /></a>
           </div>
@@ -57,11 +57,13 @@
           </div>
           <div class="mobile-menu" id="mobileMenu">
             <ul>
-              <li><a href="index.html">Home</a></li>
+              <li><a href="index.php">Home</a></li>
               <li>
-                <a href="articles.html">Articles</a>
+                <a href="articles.php">Articles</a>
               </li>
-              <li><a href="contact-us.html"> Contact Us</a></li>
+              <li><a href="contact-us.php"> Contact Us</a></li>
+              <li><a href="admin/index.php">  Login</a></li>
+
             </ul>
             <div class="header-right-btn">
               <div class="search-box">
@@ -73,115 +75,80 @@
         </div>
       </div>
     </div>
-
-    <!-- /// -->
-    <section class="contact_us">
-      <div class="container">
-        <div class="contactInfo">
-          <div>
-            <h2>Contact Info</h2>
-            <ul class="info">
-              <li>
-                <span><img src="images/contact-us/location.png" alt="" /></span>
-                <a
-                  href="https://www.google.com/maps?q=Klan+Kosova,+M529+63M,+Hyzri+Talla,+Prishtina+10000"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span class="contactus_span"
-                    >Klan Kosova, M529+63M, Hyzri Talla, Prishtina 10000</span
-                  >
-                </a>
-              </li>
-              <li>
-                <span><img src="images/contact-us/mail.png" alt="" /></span>
-                <a href="mailto:ismail.xhela@klankosova.tv">
-                  <span class="contactus_span">
-                    ismail.xhela@klankosova.tv
-                  </span>
-                </a>
-              </li>
-              <li>
-                <span><img src="images/contact-us/call.png" alt="" /></span>
-                <a href="tel:+38348595958">
-                  <span class="contactus_span">+383 48 59 59 58</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <ul class="socialIcon">
-            <li>
-              <a href="#"><img src="images/contact-us/1.png" alt="" /></a>
-            </li>
-            <li>
-              <a href="#"><img src="images/contact-us/2.png" alt="" /></a>
-            </li>
-            <li>
-              <a href="#"><img src="images/contact-us/3.png" alt="" /></a>
-            </li>
-
-            <li>
-              <a href="#"><img src="images/contact-us/5.png" alt="" /></a>
-            </li>
-          </ul>
+    <div class="container articles">
+      <div class="leftcolumn">
+        <div class="card">
+          <h2>The Future of Information Technology</h2>
+          <h5>Title description, Dec 7, 2017</h5>
+          <img src="images/about/company.jpg" class="img" />
+          <p>
+            This article explores the original intentions behind OpenAI’s
+            development of ChatGPT, how the program is being utilized now by the
+            public, both positively and negatively, and how these types of
+            conversational AI tools have transformed industries, businesses,
+            education, and everyday lives of people all around the world. From
+            customer support to idea generation to writing assistance to
+            research and reviews, ChatGPT’s journey from concept to reality
+            demonstrates the adaptability and potential of using AI in our
+            modern world.
+          </p>
         </div>
+        <div class="card">
+          <h2>ChatGPT: Concept vs. Reality</h2>
+          <h5>Title description, Sep 2, 2017</h5>
+          <img src="images/about/imag2.jpg" class="img" />
 
-        <div class="contactForm">
-          <h2>Send a Message</h2>
-          <form id="contactForm">
-            <div class="formBox">
-              <div class="inputBox w50">
-                <input
-                  type="text"
-                  id="firstName"
-                  placeholder="First Name"
-                  required
-                />
-                <span class="error" id="firstNameError"></span>
-              </div>
-              <div class="inputBox w50">
-                <input
-                  type="text"
-                  id="lastName"
-                  placeholder="Last Name"
-                  required
-                />
-                <span class="error" id="lastNameError"></span>
-              </div>
-              <div class="inputBox w50">
-                <input type="email" id="email" placeholder="Email" required />
-                <span class="error" id="emailError"></span>
-              </div>
-              <div class="inputBox w50">
-                <input
-                  type="tel"
-                  id="mobile"
-                  placeholder="Mobile Number"
-                  required
-                />
-                <span class="error" id="mobileError"></span>
-              </div>
-              <div class="inputBox w100">
-                <textarea
-                  id="message"
-                  placeholder="Write Your Message Here."
-                  required
-                ></textarea>
-                <span class="error" id="messageError"></span>
-              </div>
-              <div class="inputBox w100">
-                <input type="submit" value="Submit" class="submit" />
-              </div>
-            </div>
-          </form>
+          <p>
+            ChatGPT is designed to be an adaptable and versatile artificial
+            intelligence tool that can be applied to a variety of tasks and
+            applications. The detail and speed at which the program answers the
+            user’s prompt is revolutionary and is a large reason the program has
+            gained such popularity in such a short period of time, since the
+            program was only launched for public use in November of 2022.
+          </p>
         </div>
       </div>
-    </section>
+      <div class="rightcolumn">
+        <div class="cards">
+          <h2 class="cards-h2">Most Read</h2>
+          <hr />
+          <br />
+          <img src="images/about/image1.jpg" class="img" />
+
+          <p>
+            Brainstorming and Idea Generation: ChatGPT can generate ideas and
+            explore creative concepts for a large range of prompts and problems.
+            Whether it is planning a trip, coming up with ideas for a party or
+            present, generating new recipes, etc., ChatGPT can be a great tool.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Popular Post</h3>
+          <hr />
+          <br />
+          <img src="images/about/image3.jpeg" class="img" />
+
+          <br />
+          <img src="images/about/img.avif" class="img" />
+          <br />
+          <img src="images/home/image2.jpeg" class="img" />
+        </div>
+        <div class="card">
+          <h3><a href="contact-us.php">Contact Us</a></h3>
+          <hr />
+          <p style="margin-top: 10px">
+            "Klan Kosova" television was founded in December 2008. It began
+            broadcasting on February 17, 2009, with the symbolism of marking the
+            one-year anniversary of the declaration of Kosovo's independence.
+          </p>
+        </div>
+      </div>
+    </div>
     <footer class="footer">
       <div class="container">
         <div class="row">
           <div class="col-md-3 firs-row">
-            <a href="index.html"
+            <a href="index.php"
               ><img
                 src="images/home/logo.svg"
                 alt=""
@@ -202,17 +169,17 @@
               <br />
               <div class="use-links">
                 <li>
-                  <a href="index.html"
+                  <a href="index.php"
                     ><i class="fa-solid fa-angles-right"></i> Home</a
                   >
                 </li>
                 <li>
-                  <a href="articles.html"
+                  <a href="articles.php"
                     ><i class="fa-solid fa-angles-right"></i> Articles</a
                   >
                 </li>
                 <li>
-                  <a href="contact-us.html"
+                  <a href="contact-us.php"
                     ><i class="fa-solid fa-angles-right"></i> Contact Us</a
                   >
                 </li>
