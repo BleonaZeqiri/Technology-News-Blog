@@ -22,7 +22,6 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
         header("Location: index.php?error=Password is required");
 	    exit();
 	}else{
-		// hashing the password
         $pass = md5($pass);
 
         
@@ -36,7 +35,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
             	$_SESSION['user_name'] = $row['user_name'];
             	$_SESSION['name'] = $row['name'];
             	$_SESSION['id'] = $row['id'];
-            	header("Location: ../index.php");
+            	header("Location: home.php");
 		        exit();
             }else{
 				header("Location: index.php?error=Incorect User name or password");

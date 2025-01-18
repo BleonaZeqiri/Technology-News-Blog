@@ -1,9 +1,9 @@
 <?php 
-session_start();
+include '../../htdocs/Technology-News-Blog/admin/db_conn.php';
+$sql = "SELECT * FROM posts ORDER BY created_at DESC";
+$result = $conn->query($sql);
+?>
 
-if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
-
- ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,7 +30,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
               <li>
                 <div id="currentDate"></div>
               </li>
-              <h1>Hello, <?php echo $_SESSION['name']; ?></h1>
 
             </ul>
           </div>
@@ -88,105 +87,30 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
             <a href="#">
               <img class="portrait-news-img" src="images/home/i.png" />
               <div class="overlay"></div>
-              <h2>
-                Demystifying the foundations of AI in Justice and Public Safety
-              </h2>
+              <h2>Demystifying the foundations of AI in Justice and Public Safety</h2>
             </a>
           </div>
           <div class="portrait-right">
             <div class="portrait-cards">
-              <a href="#">
-                <div class="portrait-card">
-                  <img
-                    class="portrait-news-image"
-                    src="images/home/image3.jpeg"
-                  />
-                  <div class="portrait-news-content">
-                    <h4>ChatGPT: Concept vs Reality.</h4>
-                    <p>
-                      Initially designed to serve as a multifaceted
-                      conversational tool, ChatGPT has evolved far beyond its
-                      original design, branching out to applications in a
-                      variety of fields .
-                    </p>
-                    <p class="portrait-news-content-p">26.10.2024</p>
-                  </div>
-                </div>
-              </a>
-              <a href="singel-page.php">
-                <div class="portrait-card">
-                  <div class="portrait-news-content">
-                    <img
-                      class="portrait-news-image"
-                      src="images/home/image4.png"
-                    />
-                    <h4>What Is the Definition of Information Technology?</h4>
-                    <p class="portrait-news-content-p">26.10.2024</p>
-                  </div>
-                </div>
-              </a>
-              <a href="#">
-                <div class="portrait-card">
-                  <img
-                    class="portrait-news-image"
-                    src="images/home/image4.jpeg"
-                  />
-                  <div class="portrait-news-content">
-                    <h4>29 Types of Information Technology (2023-2024)</h4>
-                    <p>
-                      The top IT service companies can help you determine which
-                      types best meet your business needs. However, for a better
-                      overview, we’ll share some of the most important types of
-                      IT and the roles they play today.
-                    </p>
-                    <p class="portrait-news-content-p">26.10.2024</p>
-                  </div>
-                </div>
-              </a>
-              <a href="#">
-                <div class="portrait-card">
-                  <div class="portrait-news-content">
-                    <img
-                      class="portrait-news-image"
-                      src="images/home/image1.jpeg"
-                    />
-                    <h4>
-                      Facts About Information Technology (Plus 13 Benefits of
-                      IT)
-                    </h4>
-                    <p class="portrait-news-content-p">26.10.2024</p>
-                  </div>
-                </div>
-              </a>
-              <a href="#">
-                <div class="portrait-card">
-                  <img
-                    class="portrait-news-image"
-                    src="images/home/image2.jpeg"
-                  />
-                  <div class="portrait-news-content">
-                    <h4>Information Technology - CareerWise Elkhart</h4>
-                    <p>
-                      The information technology (IT) and software industry is
-                      one of the largest in the country, with millions of IT
-                      professionals in virtually every industry.
-                    </p>
-                    <p class="portrait-news-content-p">26.10.2024</p>
-                  </div>
-                </div>
-              </a>
-              <a href="#">
-                <div class="portrait-card">
-                  <div class="portrait-news-content">
-                    <img
-                      class="portrait-news-image"
-                      src="images/home/image7.png"
-                    />
-                    <h4>The Future Of Information Technology | ITI College</h4>
-                    <p class="portrait-news-content-p">26.10.2024</p>
-                  </div>
-                </div>
-              </a>
+              <?php
+              // Check if posts are available
+              if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                  echo '<a href="single-page.php?id=' . $row['id'] . '">
+                          <div class="portrait-card">
+                            <img class="portrait-news-image" src="admin/' . $row['image'] . '" alt="" />
+                            <div class="portrait-news-content">
+                              <h4>' . $row['title'] . '</h4>
+                              <p>' . substr($row['content'], 0, 100) . '...</p>
+                              <p class="portrait-news-content-p">' . date("F j, Y", strtotime($row['created_at'])) . '</p>
+                            </div>
+                          </div>
+                        </a>';
+                }
+              } else {
+                echo "<p>No posts available.</p>";
+              }
+              ?>
             </div>
           </div>
         </div>
@@ -295,9 +219,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
     <script src="main.js"></script>
   </body>
 </html>
+
 <?php 
-}else{
-     header("Location: index.php");
-     exit();
-}
- ?>
+  header("Location: admin/login.php");
+  exit();
+?>
+

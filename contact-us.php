@@ -1,3 +1,43 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $servername = "localhost"; 
+    $username = "root";        
+    $password = "";            
+    $dbname = "test_db"; 
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $first_name = $conn->real_escape_string(trim($_POST['firstName']));
+    $last_name = $conn->real_escape_string(trim($_POST['lastName']));
+    $email = $conn->real_escape_string(trim($_POST['email']));
+    $mobile = $conn->real_escape_string(trim($_POST['mobile']));
+    $message = $conn->real_escape_string(trim($_POST['message']));
+
+    if (empty($first_name) || empty($last_name) || empty($email) || empty($mobile) || empty($message)) {
+        echo json_encode(["success" => false, "message" => "All fields are required."]);
+        exit;
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo json_encode(["success" => false, "message" => "Invalid email address."]);
+        exit;
+    }
+
+    $sql = "INSERT INTO contacts (first_name, last_name, email, mobile, message) 
+            VALUES ('$first_name', '$last_name', '$email', '$mobile', '$message')";
+
+    if ($conn->query($sql) === TRUE) {
+    } else {
+        echo json_encode(["success" => false, "message" => "Error: " . $conn->error]);
+    }
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -127,55 +167,31 @@
             </li>
           </ul>
         </div>
-
-        <div class="contactForm">
-          <h2>Send a Message</h2>
-          <form id="contactForm">
-            <div class="formBox">
-              <div class="inputBox w50">
-                <input
-                  type="text"
-                  id="firstName"
-                  placeholder="First Name"
-                  required
-                />
-                <span class="error" id="firstNameError"></span>
-              </div>
-              <div class="inputBox w50">
-                <input
-                  type="text"
-                  id="lastName"
-                  placeholder="Last Name"
-                  required
-                />
-                <span class="error" id="lastNameError"></span>
-              </div>
-              <div class="inputBox w50">
-                <input type="email" id="email" placeholder="Email" required />
-                <span class="error" id="emailError"></span>
-              </div>
-              <div class="inputBox w50">
-                <input
-                  type="tel"
-                  id="mobile"
-                  placeholder="Mobile Number"
-                  required
-                />
-                <span class="error" id="mobileError"></span>
-              </div>
-              <div class="inputBox w100">
-                <textarea
-                  id="message"
-                  placeholder="Write Your Message Here."
-                  required
-                ></textarea>
-                <span class="error" id="messageError"></span>
-              </div>
-              <div class="inputBox w100">
-                <input type="submit" value="Submit" class="submit" />
-              </div>
+            <div class="contactForm">
+                <h2>Send a Message</h2>
+                <form id="contactForm" method="POST">
+                    <div class="formBox">
+                        <div class="inputBox w50">
+                            <input type="text" name="firstName" placeholder="First Name" required>
+                        </div>
+                        <div class="inputBox w50">
+                            <input type="text" name="lastName" placeholder="Last Name" required>
+                        </div>
+                        <div class="inputBox w50">
+                            <input type="email" name="email" placeholder="Email" required>
+                        </div>
+                        <div class="inputBox w50">
+                            <input type="tel" name="mobile" placeholder="Mobile Number" required>
+                        </div>
+                        <div class="inputBox w100">
+                            <textarea name="message" placeholder="Write Your Message Here." required></textarea>
+                        </div>
+                        <div class="inputBox w100">
+                            <input type="submit" value="Submit" class="submit">
+                        </div>
+                    </div>
+                </form>
             </div>
-          </form>
         </div>
       </div>
     </section>

@@ -1,3 +1,8 @@
+<?php 
+include '../../htdocs/Technology-News-Blog/admin/db_conn.php';
+$sql = "SELECT * FROM posts ORDER BY created_at DESC";
+$result = $conn->query($sql);
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -77,36 +82,21 @@
     </div>
     <div class="container articles">
       <div class="leftcolumn">
-        <div class="card">
-          <h2>The Future of Information Technology</h2>
-          <h5>Title description, Dec 7, 2017</h5>
-          <img src="images/about/company.jpg" class="img" />
-          <p>
-            This article explores the original intentions behind OpenAI’s
-            development of ChatGPT, how the program is being utilized now by the
-            public, both positively and negatively, and how these types of
-            conversational AI tools have transformed industries, businesses,
-            education, and everyday lives of people all around the world. From
-            customer support to idea generation to writing assistance to
-            research and reviews, ChatGPT’s journey from concept to reality
-            demonstrates the adaptability and potential of using AI in our
-            modern world.
-          </p>
-        </div>
-        <div class="card">
-          <h2>ChatGPT: Concept vs. Reality</h2>
-          <h5>Title description, Sep 2, 2017</h5>
-          <img src="images/about/imag2.jpg" class="img" />
-
-          <p>
-            ChatGPT is designed to be an adaptable and versatile artificial
-            intelligence tool that can be applied to a variety of tasks and
-            applications. The detail and speed at which the program answers the
-            user’s prompt is revolutionary and is a large reason the program has
-            gained such popularity in such a short period of time, since the
-            program was only launched for public use in November of 2022.
-          </p>
-        </div>
+        <?php if ($result->num_rows > 0): ?>
+          <?php while ($row = $result->fetch_assoc()): ?>
+            <div class="card">
+              <h2><?php echo htmlspecialchars($row['title']); ?></h2>
+              <h5><?php echo htmlspecialchars($row['created_at']); ?></h5>
+              <img src="admin/<?php echo htmlspecialchars($row['image']); ?>" alt="Post Image" />
+              <p><?php echo htmlspecialchars(substr($row['content'], 0, 200)) . '...'; ?></p>
+            </div>
+          <?php endwhile; ?>
+        <?php else: ?>
+          <div class="card">
+            <h2>No posts available</h2>
+            <p>There are no articles to display at the moment. Please check back later.</p>
+          </div>
+        <?php endif; ?>
       </div>
       <div class="rightcolumn">
         <div class="cards">
