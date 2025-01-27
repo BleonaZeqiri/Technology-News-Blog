@@ -20,124 +20,85 @@ $result = $stmt->get_result();
 <html>
 <head>
     <title>Home</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-        h1, h2 {
-            color: #333;
-        }
-        a {
-            text-decoration: none;
-            color: #fff;
-            background-color: #ff6b6b;
-            padding: 8px 16px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        a:hover {
-            background-color: #ff5252;
-        }
-        form {
-            background-color: #fff;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
-        }
-        label {
-            display: block;
-            margin: 10px 0 5px;
-            font-weight: bold;
-            color: #555;
-        }
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-        textarea {
-            resize: none;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 16px;
-        }
+    <link rel="stylesheet" href="css/user.css?v=1.0">
 
-        button:hover {
-            background-color: #45a049;
-        }
-        table {
-            width: 100%;
-            max-width: 800px;
-            margin: 20px auto;
-            border-collapse: collapse;
-            background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        th, td {
-            text-align: left;
-            padding: 12px;
-            border: 1px solid #ddd;
-        }
-        th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
-        tr:hover {
-            background-color: #f9f9f9;
-        }
-        .actions {
-            display: flex;
-            gap: 10px;
-        }
-        .actions form {
-            margin: 0;
-        }
-    </style>
+    
 </head>
 <body>
-    <h1>Welcome, <?php echo $_SESSION['user_name']; ?></h1>
-    <a href="logout.php" class="button">Logout</a>
+<header>
+        <div class="logosec">
+            <div class="logo">TechnologyNews</div>
+            <img src="images/images/hamburger.svg" class="icn menuicn" id="menuicn" alt="menu-icon">
+        </div>
+        <div class="dropdown">
+            <img src="images/images/user.svg" class="dpicn dropbtn" alt="dp">
+            <div class="dropdown-content" style="left:0;">
+            <a href="profile.php">Profile</a>
 
-    <h2>Create New Post</h2>
-    <form action="process_post.php" method="POST" class="form" enctype="multipart/form-data">
-        <label for="title" class="label">Title:</label>
-        <input type="text" name="title" id="title" class="input" required>
-        <label for="content" class="label">Content:</label>
-        <textarea name="content" id="content" rows="4" class="input" required></textarea>
-        <label for="image" class="label">Image:</label>
-        <input type="file" name="image" id="image" class="input">
-        <button type="submit" name="action" value="create" class="button">Create Post</button>
-    </form>
+                <a href="#">Logout</a>
+            </div>
+        </div>
+    </header>
+    <div class="main-container">
+        <div class="navcontainer">
+        <nav class="nav">
+    <div class="nav-upper-options">
+    <a href="home.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'superadmin.php' ? 'active' : ''; ?>">
+            <img src="images/images/home.svg" class="nav-img" alt="dashboard">
+            <h3 class="home">Home</h3>
+        </a>
+        <a href="articles.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'articles.php' ? 'active' : ''; ?>">
+            <img src="images/images/article.svg" class="nav-img" >
+            <h3>Articles</h3>
+        </a>
+      
+     
+        <a href="logout.php" class="nav-option">
+            <img src="images/images/logout.svg" class="nav-img" >
+            <h3 >Logout</h3>
+        </a>
+    </div>
 
-    <h2>Your Posts</h2>
-    <table border="1" class="table">
+</nav>
+</div>
+
+<div class="main">
+            <div class="report-container">
+                <div class="report-header">
+                    <h1 class="recent-Articles">Recent Articles</h1>
+                    <button class="view" id="myBtn">Add</button>
+                </div>
+
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2 class="h2_add">Add a New Article</h2>
+                        <form action="process_post.php" method="POST" class="form" enctype="multipart/form-data">
+                            <div class="input">
+                                <label for="title">Article Title</label>
+                                <input type="text" name="title" id="title" required>
+                            </div>
+                            <div class="input">
+                                <label for="content">Article Content</label>
+                                <textarea name="content" id="content" rows="4" required></textarea>
+                            </div>
+                            <div class="input">
+                                <label for="image">Image:</label>
+                                <input type="file" name="image" id="image" style="border:none;">
+                            </div>
+                            <button type="submit" name="action" value="create" class="button">Add</button>
+                        </form>
+                    </div>
+                </div>
+                <table border="1" class="table">
         <thead>
             <tr>
                 <th>Title</th>
                 <th>Content</th>
                 <th>Image</th>
-                <th>Actions</th>
+                <th>Edit</th>
+                <th>Delete</th>
+
             </tr>
         </thead>
         <tbody>
@@ -154,7 +115,11 @@ $result = $stmt->get_result();
                     </td>
                     <td>
                         <a href="edit_post.php?id=<?php echo $row['id']; ?>" class="button">Edit</a>
-                        <form action="process_post.php" method="POST" style="display:inline;">
+                      
+                       
+                    </td>
+                    <td>
+                    <form action="process_post.php" method="POST" style="display:inline;">
                             <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                             <button type="submit" name="action" value="delete" class="button delete" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
                         </form>
@@ -163,6 +128,69 @@ $result = $stmt->get_result();
             <?php endwhile; ?>
         </tbody>
     </table>
+</div>
+
+
+   
+
+   
+     <script>
+var modal = document.getElementById("myModal");
+
+var btn = document.getElementById("myBtn");
+
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function () {
+  modal.style.display = "block";
+};
+
+span.onclick = function () {
+  modal.style.display = "none";
+};
+
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+var editModal = document.getElementById("editModal");
+var editBtn = document.getElementById("editBtn");
+var closeEdit = document.getElementsByClassName("close-edit")[0];
+
+var addModal = document.getElementById("myModal");
+var addBtn = document.getElementById("myBtn"); 
+var closeAdd = document.getElementsByClassName("close")[0];
+
+editBtn.onclick = function(event) {
+    event.preventDefault(); 
+    editModal.style.display = "block";
+}
+
+closeEdit.onclick = function() {
+    editModal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == editModal) {
+        editModal.style.display = "none";
+    }
+}
+
+addBtn.onclick = function() {
+    addModal.style.display = "block";
+}
+
+closeAdd.onclick = function() {
+    addModal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == addModal) {
+        addModal.style.display = "none";
+    }
+}
+    </script>
 </body>
 </html>
 

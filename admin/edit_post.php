@@ -28,101 +28,12 @@ if (isset($_SESSION['id']) && isset($_GET['id'])) {
 <head>
     <title>Edit Post</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-        h1, h2 {
-            color: #333;
-        }
-        a {
-            text-decoration: none;
-            color: #fff;
-            background-color: #ff6b6b;
-            padding: 8px 16px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        a:hover {
-            background-color: #ff5252;
-        }
-        form {
-            background-color: #fff;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
-        }
-        label {
-            display: block;
-            margin: 10px 0 5px;
-            font-weight: bold;
-            color: #555;
-        }
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-        textarea {
-            resize: none;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 16px;
-        }
+    <link rel="stylesheet" href="css/user.css?v=1.0">
+    <link rel="stylesheet" href="css/user.css?v=1.0">
 
-        button:hover {
-            background-color: #45a049;
-        }
-        table {
-            width: 100%;
-            max-width: 800px;
-            margin: 20px auto;
-            border-collapse: collapse;
-            background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        th, td {
-            text-align: left;
-            padding: 12px;
-            border: 1px solid #ddd;
-        }
-        th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
-        tr:hover {
-            background-color: #f9f9f9;
-        }
-        .actions {
-            display: flex;
-            gap: 10px;
-        }
-        .actions form {
-            margin: 0;
-        }
-    </style>
+
+</head>
+
 <body>
     <h1>Edit Post</h1>
     <form action="process_post.php" method="POST" enctype="multipart/form-data">
@@ -142,8 +53,8 @@ if (isset($_SESSION['id']) && isset($_GET['id'])) {
         <?php endif; ?>
         <input type="file" name="image" id="image">
         
-        <button type="submit" name="action" value="edit">Update Post</button>
+        <button type="submit" name="action" value="edit" class="button">Update Post</button>
     </form>
-    <a href="home.php">Back to Home</a>
+    <a href="home.php" class="button">Back to Home</a>
 </body>
 </html>
