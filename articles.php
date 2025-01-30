@@ -66,6 +66,9 @@ $result = $conn->query($sql);
               <li>
                 <a href="articles.php">Articles</a>
               </li>
+              <li>
+                <a href="news.php">News</a>
+              </li>
               <li><a href="contact-us.php"> Contact Us</a></li>
               <li><a href="admin/index.php">  Login</a></li>
 
@@ -171,6 +174,11 @@ $result = $conn->query($sql);
                 <li>
                   <a href="contact-us.php"
                     ><i class="fa-solid fa-angles-right"></i> Contact Us</a
+                  >
+                </li>
+                <li>
+                  <a href="news.php"
+                    ><i class="fa-solid fa-angles-right"></i> News</a
                   >
                 </li>
               </div>

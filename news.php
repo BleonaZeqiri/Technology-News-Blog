@@ -1,59 +1,22 @@
-<?php
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $servername = "localhost"; 
-    $username = "root";        
-    $password = "";            
-    $dbname = "test_db"; 
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $first_name = $conn->real_escape_string(trim($_POST['firstName']));
-    $last_name = $conn->real_escape_string(trim($_POST['lastName']));
-    $email = $conn->real_escape_string(trim($_POST['email']));
-    $mobile = $conn->real_escape_string(trim($_POST['mobile']));
-    $message = $conn->real_escape_string(trim($_POST['message']));
-
-    if (empty($first_name) || empty($last_name) || empty($email) || empty($mobile) || empty($message)) {
-        echo json_encode(["success" => false, "message" => "All fields are required."]);
-        exit;
-    }
-
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo json_encode(["success" => false, "message" => "Invalid email address."]);
-        exit;
-    }
-
-    $sql = "INSERT INTO contacts (first_name, last_name, email, mobile, message) 
-            VALUES ('$first_name', '$last_name', '$email', '$mobile', '$message')";
-
-    if ($conn->query($sql) === TRUE) {
-    } else {
-        echo json_encode(["success" => false, "message" => "Error: " . $conn->error]);
-    }
-
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Technology News Blog</title>
+    <title>Custom Expandable Card Slider</title>
+    <link rel="stylesheet" href="style/news.css" />
     <link rel="stylesheet" href="style/style.css" />
-    <link rel="stylesheet" href="style/contact-us.css" />
+    <link rel="stylesheet" href="style/foter.css" />
 
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
+
+
   </head>
   <body>
-    <div class="header-top">
+  <div class="header-top">
       <div class="container">
         <div class="header-row">
           <div class="header-info-left">
@@ -118,85 +81,71 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
       </div>
     </div>
+    <section class="game-section">
+      <button class="nav-btn prev">&#10094;</button>
 
-    <!-- /// -->
-    <section class="contact_us">
-      <div class="container">
-        <div class="contactInfo">
-          <div>
-            <h2>Contact Info</h2>
-            <ul class="info">
-              <li>
-                <span><img src="images/contact-us/location.png" alt="" /></span>
-                <a
-                  href="https://www.google.com/maps?q=Klan+Kosova,+M529+63M,+Hyzri+Talla,+Prishtina+10000"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span class="contactus_span"
-                    >Klan Kosova, M529+63M, Hyzri Talla, Prishtina 10000</span
-                  >
-                </a>
-              </li>
-              <li>
-                <span><img src="images/contact-us/mail.png" alt="" /></span>
-                <a href="mailto:ismail.xhela@klankosova.tv">
-                  <span class="contactus_span">
-                    ismail.xhela@klankosova.tv
-                  </span>
-                </a>
-              </li>
-              <li>
-                <span><img src="images/contact-us/call.png" alt="" /></span>
-                <a href="tel:+38348595958">
-                  <span class="contactus_span">+383 48 59 59 58</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <ul class="socialIcon">
-            <li>
-              <a href="#"><img src="images/contact-us/1.png" alt="" /></a>
-            </li>
-            <li>
-              <a href="#"><img src="images/contact-us/2.png" alt="" /></a>
-            </li>
-            <li>
-              <a href="#"><img src="images/contact-us/3.png" alt="" /></a>
-            </li>
-
-            <li>
-              <a href="#"><img src="images/contact-us/5.png" alt="" /></a>
-            </li>
-          </ul>
-        </div>
-            <div class="contactForm">
-                <h2>Send a Message</h2>
-                <form id="contactForm" method="POST">
-                    <div class="formBox">
-                        <div class="inputBox w50">
-                            <input type="text" name="firstName" placeholder="First Name" required>
-                        </div>
-                        <div class="inputBox w50">
-                            <input type="text" name="lastName" placeholder="Last Name" required>
-                        </div>
-                        <div class="inputBox w50">
-                            <input type="email" name="email" placeholder="Email" required>
-                        </div>
-                        <div class="inputBox w50">
-                            <input type="tel" name="mobile" placeholder="Mobile Number" required>
-                        </div>
-                        <div class="inputBox w100">
-                            <textarea name="message" placeholder="Write Your Message Here." required></textarea>
-                        </div>
-                        <div class="inputBox w100">
-                            <input type="submit" value="Submit" class="submit">
-                        </div>
-                    </div>
-                </form>
+      <div class="slider-container">
+        <div class="slider">
+          <div
+            class="item active"
+            style="
+              background-image: url('https://ucarecdn.com/75d7700d-c102-40ff-9ba1-f0641444c616/dota2.jpg');
+            "
+          >
+            <div class="item-desc">
+              <h3>Dota 2</h3>
+              <p>Dota 2 is a multiplayer online battle arena by Valve.</p>
             </div>
+          </div>
+          <div
+            class="item"
+            style="
+              background-image: url('https://ucarecdn.com/2a5f69bc-befa-49f4-acc6-ab1dcae514c7/winter3.jpg');
+            "
+          >
+            <div class="item-desc">
+              <h3>The Witcher 3</h3>
+              <p>An action role-playing game set in a fantasy open world.</p>
+            </div>
+          </div>
+          <div
+            class="item"
+            style="
+              background-image: url('https://ucarecdn.com/ec1918b1-2674-452c-bf61-8f73d8cc40c6/rdr2.jpg');
+            "
+          >
+            <div class="item-desc">
+              <h3>RDR 2</h3>
+              <p>
+                A Western action-adventure game developed by Rockstar Games.
+              </p>
+            </div>
+          </div>
+          <div
+            class="item"
+            style="
+              background-image: url('https://ucarecdn.com/6ba9052d-6105-4491-917b-e1a65b68f920/pubg.jpg');
+            "
+          >
+            <div class="item-desc">
+              <h3>PUBG Mobile</h3>
+              <p>A battle royale shooter game.</p>
+            </div>
+          </div>
+          <div
+            class="item"
+            style="
+              background-image: url('https://ucarecdn.com/77598be3-c67f-40de-83d3-71a0f2f76c56/fortnite.jpg');
+            "
+          >
+            <div class="item-desc">
+              <h3>Fortnite</h3>
+              <p>A survival game with battle royale mode.</p>
+            </div>
+          </div>
         </div>
       </div>
+      <button class="nav-btn next">&#10095;</button>
     </section>
     <footer class="footer">
       <div class="container">
@@ -239,7 +188,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </li>
                 <li>
                   <a href="news.php"
-                    ><i class="fa-solid fa-angles-right"></i> News </a
+                    ><i class="fa-solid fa-angles-right"></i> News</a
                   >
                 </li>
               </div>
@@ -302,6 +251,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         reserved
       </div>
     </section>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Custom Script -->
     <script src="main.js"></script>
+
   </body>
 </html>

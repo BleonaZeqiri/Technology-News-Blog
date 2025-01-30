@@ -79,3 +79,44 @@ const options = {
 const currentDate = new Date().toLocaleDateString("en-US", options);
 
 dateElement.innerHTML = `<img src="images/home/header_icon2.png" alt="" /> ${currentDate}`;
+//news
+$(document).ready(function () {
+  let currentIndex = 0;
+  const items = $(".slider .item");
+  const totalItems = items.length;
+  const itemWidth = $(".item").outerWidth(true);
+  const slider = $(".slider");
+
+  function updateSlider() {
+    let newTransformValue = -currentIndex * itemWidth;
+    slider.css("transform", `translateX(${newTransformValue}px)`);
+  }
+
+  $(".next").click(function () {
+    if (currentIndex < totalItems - 1) {
+      currentIndex++;
+    } else {
+      currentIndex = 0; // Loop back to first item
+    }
+    updateSlider();
+  });
+
+  $(".prev").click(function () {
+    if (currentIndex > 0) {
+      currentIndex--;
+    } else {
+      currentIndex = totalItems - 1; // Loop to last item
+    }
+    updateSlider();
+  });
+
+  $(".slider .item").click(function () {
+    $(".slider .item").removeClass("active");
+    $(this).addClass("active");
+  });
+
+  // Auto Scroll (Optional)
+  setInterval(function () {
+    $(".next").click();
+  }, 4000);
+});
