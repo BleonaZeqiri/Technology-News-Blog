@@ -28,7 +28,7 @@
         <div class="navcontainer">
         <nav class="nav">
     <div class="nav-upper-options">
-    <a href="superadmin.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'superadmin.php' ? 'active' : ''; ?>">
+    <a href="home.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'home.php' ? 'active' : ''; ?>">
             <img src="images/home.svg" class="nav-img" alt="dashboard">
             <h3 class="home">Home</h3>
         </a>
@@ -66,91 +66,74 @@
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2 class="h2_add">Add a New User</h2>
-        <form class="add">
-            <div class="input">
-            <label for="articleTitle">Username</label>
-            <input type="text" id="articleTitle" name="articleTitle">
-            </div>
-            <div class="input">
-            <label for="articleTitle">Password</label>
-            <input type="text" id="articleTitle" name="articleTitle">
+        <form class="add" method="POST" action="add_user.php">
+    <div class="input">
+        <label for="user_name">Username</label>
+        <input type="text" id="user_name" name="user_name" required>
+    </div>
+    <div class="input">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <div class="input">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <div class="input">
+        <label for="role">Role</label>
+        <select id="role" name="role" required>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+        </select>
+    </div>
+    <button type="submit">Add</button>
+</form>
 
-            </div>
-            <div class="input">
-            <label for="articleTitle">Name</label>
-            <input type="text" id="articleTitle" name="articleTitle">
-
-            </div>
-          
-          
-            <button type="submit">Add</button>
-        </form>
     </div>
 </div>
 
                 
-                <table class="report-body">
-                    <tr class="report-topic-heading">
-                        <th class="t-op">Id</th>
-                        <th class="t-op">UserName</th>
+<table class="report-body">
+    <tr class="report-topic-heading">
+        <th class="t-op">Id</th>
+        <th class="t-op">UserName</th>
+        <th class="t-op">Password</th>
+        <th class="t-op">Name</th>
+        <th class="t-op">Role</th>
+        <th class="t-op">Created</th>
+        <th class="t-op">Updated</th>
+        <th class="t-op">Edit</th>
+        <th class="t-op">Delete</th>
+    </tr>
 
-                        <th class="t-op">Password</th>
-                        <th class="t-op">Name</th>
-                        <th class="t-op">Created</th>
-                        <th class="t-op">Updated</th>
+    <?php
+    // Include database connection
+    require_once '../admin/db_conn.php'; 
 
+    $query = "SELECT * FROM users";
+    $result = mysqli_query($conn, $query);
+    while($row = mysqli_fetch_assoc($result)) {
+    ?>
+        <tr class="item1">
+            <td class="t-op-nextlvl"><?php echo $row['id']; ?></td>
+            <td class="t-op-nextlvl"><?php echo $row['user_name']; ?></td>
+            <td class="t-op-nextlvl"><?php echo $row['password']; ?></td>
+            <td class="t-op-nextlvl"><?php echo $row['name']; ?></td>
+            <td class="t-op-nextlvl"><?php echo $row['role']; ?></td>
+            <td class="t-op-nextlvl"><?php echo $row['created_at']; ?></td>
+            <td class="t-op-nextlvl"><?php echo $row['updated_at']; ?></td>
 
+            <td class="t-op-nextlvl">
+                <a href="edit_user.php?id=<?php echo $row['id']; ?>" class="button">Edit</a>
+            </td>
 
-                        <th class="t-op">Edit</th>
-                        <th class="t-op">Delete</th>
-                    </tr>
-                    <tr class="item1">
-                        <td class="t-op-nextlvl">1</td>
-                        <td class="t-op-nextlvl">Article 1</td>
-                     
-                        <td class="t-op-nextlvl">Article 1</td>
+            <td class="t-op-nextlvl">
+                <a href="delete_user.php?id=<?php echo $row['id']; ?>" class="button">Delete</a>
+            </td>
+        </tr>
+    <?php } ?>
+</table>
 
-                        <td class="t-op-nextlvl">Article 1</td>
-                        <td class="t-op-nextlvl">Article 1</td>
-
-                        
-                        <td class="t-op-nextlvl">#</td>
-
-                        
-                        <td class="t-op-nextlvl">
-    <a href="#" class="button" id="editBtn">Edit</a>
-
-<div id="editModal" class="modal edit-modal">
-    <div class="modal-content edit-modal-content">
-        <span class="close-edit">&times;</span>
-        <h2 class="h2_add">Edit Article</h2>
-        <form class="edit">
-            <div class="input">
-            <label for="articleTitle">Username</label>
-            <input type="text" id="articleTitle" name="articleTitle">
-            </div>
-            <div class="input">
-            <label for="articleTitle">Password</label>
-            <input type="text" id="articleTitle" name="articleTitle">
-
-            </div>
-            <div class="input">
-            <label for="articleTitle">Name</label>
-            <input type="text" id="articleTitle" name="articleTitle">
-
-            </div>
-          
-          
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-</div>
-</td>
-
-
-                        <td class="t-op-nextlvl "><a href="/" class="button">Delete</a></td>
-                    </tr>
-                </table>
             </div>
         </div>
     </div>

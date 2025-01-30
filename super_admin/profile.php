@@ -1,10 +1,10 @@
 
 <?php
 session_start();
-include("db_conn.php");
+include("../admin/db_conn.php");
 
 if (!isset($_SESSION['id'])) {
-    header("Location: index.php");
+    header("Location: ../admin/index.php");
     exit();
 }
 
@@ -38,7 +38,7 @@ $result = $stmt->get_result();
             <img src="images/user.svg" class="dpicn dropbtn" alt="dp">
             <div class="dropdown-content" style="left:0;">
                 <a href="profile.php">Profile</a>
-                <a href="logout.php">Logout</a>
+                <a href="../admin/logout.php">Logout</a>
             </div>
         </div>
     </header>
@@ -63,7 +63,7 @@ $result = $stmt->get_result();
             <img src="images/user.svg" class="nav-img" >
             <h3>Register</h3>
         </a>
-        <a href="logout.php"  class="nav-option">
+        <a href="../admin/logout.php"  class="nav-option">
             <img src="images/logout.svg" class="nav-img" >
             <h3>Logout</h3>
         </a>

@@ -38,7 +38,7 @@ $result = $stmt->get_result();
             <img src="images/images/user.svg" class="dpicn dropbtn" alt="dp">
             <div class="dropdown-content" style="left:0;">
                 <a href="profile.php">Profile</a>
-                <a href="../logout.php">Logout</a>
+                <a href="logout.php">Logout</a>
             </div>
         </div>
     </header>
@@ -55,7 +55,7 @@ $result = $stmt->get_result();
             <h3>Articles</h3>
         </a>
     
-        <a href="../logout.php"  class="nav-option">
+        <a href="logout.php"  class="nav-option">
             <img src="images/images/logout.svg" class="nav-img" >
             <h1 >Logout</h1>
         </a>

@@ -1,3 +1,33 @@
+<?php
+$servername = "localhost";
+$username = "root"; // your username
+$password = ""; // your password
+$dbname = "test_db"; // your database name
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT * FROM contacts";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Store the results in an array
+    $contacts = [];
+    while($row = $result->fetch_assoc()) {
+        $contacts[] = $row;
+    }
+} else {
+    $contacts = [];
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +58,7 @@
         <div class="navcontainer">
         <nav class="nav">
     <div class="nav-upper-options">
-    <a href="superadmin.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'superadmin.php' ? 'active' : ''; ?>">
+    <a href="home.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'superadmin.php' ? 'active' : ''; ?>">
             <img src="images/home.svg" class="nav-img" alt="dashboard">
             <h3 class="home">Home</h3>
         </a>
@@ -63,65 +93,32 @@
 
 
                 
-                <table class="report-body">
-                    <tr class="report-topic-heading">
-                        <th class="t-op">Id</th>
-                        <th class="t-op">FirstName</th>
+<table class="report-body">
+    <tr class="report-topic-heading">
+        <th class="t-op">Id</th>
+        <th class="t-op">FirstName</th>
+        <th class="t-op">LastName</th>
+        <th class="t-op">Email</th>
+        <th class="t-op">Mobile</th>
+        <th class="t-op">Message</th>
+        <th class="t-op">Submitted</th>
+       
+    </tr>
 
-                        <th class="t-op">Email</th>
-                        <th class="t-op">Mobile</th>
-                        <th class="t-op">Message</th>
-                        <th class="t-op">Submited</th>
+    <?php foreach ($contacts as $contact): ?>
+        <tr class="item1">
+            <td class="t-op-nextlvl"><?= $contact['id']; ?></td>
+            <td class="t-op-nextlvl"><?= $contact['first_name']; ?></td>
+            <td class="t-op-nextlvl"><?= $contact['last_name']; ?></td>
+            <td class="t-op-nextlvl"><?= $contact['email']; ?></td>
+            <td class="t-op-nextlvl"><?= $contact['mobile']; ?></td>
+            <td class="t-op-nextlvl"><?= $contact['message']; ?></td>
+            <td class="t-op-nextlvl"><?= $contact['submitted_at']; ?></td>
+            
+        </tr>
+    <?php endforeach; ?>
+</table>
 
-
-
-                        <th class="t-op">Edit</th>
-                        <th class="t-op">Delete</th>
-                    </tr>
-                    <tr class="item1">
-                        <td class="t-op-nextlvl">1</td>
-                        <td class="t-op-nextlvl">Article 1</td>
-                        <td class="t-op-nextlvl">Article 1</td>
-
-                        <td class="t-op-nextlvl">Article 1</td>
-                        <td class="t-op-nextlvl">Article 1</td>
-
-                        
-                        <td class="t-op-nextlvl">#</td>
-
-                        
-                        <td class="t-op-nextlvl">
-    <a href="#" class="button" id="editBtn">Edit</a>
-
-<div id="editModal" class="modal edit-modal">
-    <div class="modal-content edit-modal-content">
-        <span class="close-edit">&times;</span>
-        <h2 class="h2_add">Edit Article</h2>
-        <form class="edit">
-            <div class="input">
-            <label for="articleTitle">Article Title</label>
-            <input type="text" id="articleTitle" name="articleTitle">
-            </div>
-            <div class="input">
-            <label for="articleTitle">Article Content</label>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
-            </div>
-            <div class="input">
-            <label for="image" class="label">Image:</label>
-            <input type="file" name="image" id="image" class="input" style="border:none; border-radius:0; padding:0;">
-         
-            </div>
-          
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-</div>
-</td>
-
-
-                        <td class="t-op-nextlvl "><a href="/" class="button">Delete</a></td>
-                    </tr>
-                </table>
             </div>
         </div>
     </div>

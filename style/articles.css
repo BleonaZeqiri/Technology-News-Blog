@@ -29,6 +29,9 @@ hr {
   margin-top: 20px;
   background-color: #ffffff;
 }
+.card img {
+  width: 100%;
+}
 .cards {
   padding: 20px;
   margin-top: 20px;
