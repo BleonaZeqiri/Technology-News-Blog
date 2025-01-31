@@ -1,8 +1,13 @@
 <?php 
 include '../../htdocs/Technology-News-Blog/admin/db_conn.php';
-$sql = "SELECT * FROM posts ORDER BY created_at DESC";
-$result = $conn->query($sql);
+$sql1 = "SELECT * FROM posts ORDER BY created_at DESC LIMIT 3";
+$result1 = $conn->query($sql1);
+
+$sql2 = "SELECT * FROM article_post ORDER BY created_at DESC";
+$result2 = $conn->query($sql2);
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -84,15 +89,37 @@ $result = $conn->query($sql);
       </div>
     </div>
     <div class="container articles">
-      <div class="leftcolumn">
-        <?php if ($result->num_rows > 0): ?>
-          <?php while ($row = $result->fetch_assoc()): ?>
+    <div class="leftcolumn">
+    <?php if ($result2->num_rows > 0): ?>
+        <?php while ($row = $result2->fetch_assoc()): ?>
             <div class="card">
-              <h2><?php echo htmlspecialchars($row['title']); ?></h2>
-              <h5><?php echo htmlspecialchars($row['created_at']); ?></h5>
-              <img src="admin/<?php echo htmlspecialchars($row['image']); ?>" alt="Post Image" />
-              <p><?php echo htmlspecialchars(substr($row['content'], 0, 200)) . '...'; ?></p>
+                <h2><?php echo htmlspecialchars($row['title']); ?></h2>
+                <h5><?php echo date('d.m.Y', strtotime($row['created_at'])); ?></h5>
+                <?php if (!empty($row['image'])): ?>
+                    <img src="admin/<?php echo htmlspecialchars($row['image']); ?>" alt="Post Image" />
+                <?php endif; ?>
+                <p><?php echo nl2br(htmlspecialchars($row['content'])); ?></p>
             </div>
+        <?php endwhile; ?>
+    <?php else: ?>
+        <div class="card">
+            <h2>No articles available</h2>
+            <p>There are no articles to display at the moment. Please check back later.</p>
+        </div>
+    <?php endif; ?>
+</div>
+
+      <div class="rightcolumn">
+        <div class="cards">
+          <h2 class="cards-h2">Lates Post</h2>
+          <hr />
+          <br />
+          <?php if ($result1->num_rows > 0): ?>
+          <?php while ($row = $result1->fetch_assoc()): ?>
+            <img src="admin/<?php echo htmlspecialchars($row['image']); ?>" alt="Post Image" style="width:100%;" />
+
+            <p><?php echo htmlspecialchars($row['content']); ?></p>
+         
           <?php endwhile; ?>
         <?php else: ?>
           <div class="card">
@@ -100,20 +127,6 @@ $result = $conn->query($sql);
             <p>There are no articles to display at the moment. Please check back later.</p>
           </div>
         <?php endif; ?>
-      </div>
-      <div class="rightcolumn">
-        <div class="cards">
-          <h2 class="cards-h2">Most Read</h2>
-          <hr />
-          <br />
-          <img src="images/about/image1.jpg" class="img" />
-
-          <p>
-            Brainstorming and Idea Generation: ChatGPT can generate ideas and
-            explore creative concepts for a large range of prompts and problems.
-            Whether it is planning a trip, coming up with ideas for a party or
-            present, generating new recipes, etc., ChatGPT can be a great tool.
-          </p>
         </div>
         <div class="card">
           <h3>Popular Post</h3>

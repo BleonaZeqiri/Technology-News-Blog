@@ -1,13 +1,11 @@
 <?php
 $servername = "localhost";
-$username = "root"; // your username
-$password = ""; // your password
-$dbname = "test_db"; // your database name
+$username = "root"; 
+$password = "";
+$dbname = "test_db"; 
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -16,7 +14,6 @@ $sql = "SELECT * FROM contacts";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    // Store the results in an array
     $contacts = [];
     while($row = $result->fetch_assoc()) {
         $contacts[] = $row;
@@ -88,7 +85,7 @@ $conn->close();
             
             <div class="report-container">
             <div class="report-header">
-    <h1 class="recent-Articles">Recent Articles</h1>
+    <h1 class="recent-Articles">Contacts</h1>
 </div>
 
 

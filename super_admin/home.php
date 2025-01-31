@@ -2,14 +2,12 @@
 session_start();
 include("../admin/db_conn.php");
 
-// Check if user is logged in, if not redirect to login page
 if (!isset($_SESSION['id'])) {
     header("Location: ../admin/index.php");
     exit();
 }
 
-// Query to get all posts from the posts table
-$query = "SELECT * FROM posts"; // Removed the WHERE clause to fetch all posts
+$query = "SELECT * FROM posts"; 
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -42,7 +40,7 @@ $result = $stmt->get_result();
         <div class="navcontainer">
             <nav class="nav">
                 <div class="nav-upper-options">
-                    <a href="home.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'superadmin.php' ? 'active' : ''; ?>">
+                    <a href="home.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'home.php' ? 'active' : ''; ?>">
                         <img src="images/home.svg" class="nav-img" alt="dashboard">
                         <h3>Home</h3>
                     </a>
@@ -69,7 +67,7 @@ $result = $stmt->get_result();
         <div class="main">
             <div class="report-container">
                 <div class="report-header">
-                    <h1 class="recent-Articles">Recent Articles</h1>
+                    <h1 class="recent-Articles">Home Articles</h1>
                     <button class="view" id="myBtn">Add</button>
                 </div>
                 

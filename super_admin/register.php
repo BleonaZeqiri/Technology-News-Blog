@@ -58,7 +58,7 @@
             
             <div class="report-container">
             <div class="report-header">
-    <h1 class="recent-Articles">Recent Articles</h1>
+    <h1 class="recent-Articles">Users</h1>
     <button class="view" id="myBtn">Add </button>
 </div>
 
@@ -107,7 +107,6 @@
     </tr>
 
     <?php
-    // Include database connection
     require_once '../admin/db_conn.php'; 
 
     $query = "SELECT * FROM users";
@@ -128,8 +127,9 @@
             </td>
 
             <td class="t-op-nextlvl">
-                <a href="delete_user.php?id=<?php echo $row['id']; ?>" class="button">Delete</a>
-            </td>
+    <a href="delete_user.php?id=<?php echo $row['id']; ?>" class="button" onclick="return confirmDelete()">Delete</a>
+</td>
+
         </tr>
     <?php } ?>
 </table>
@@ -192,6 +192,10 @@ window.onclick = function(event) {
     if (event.target == addModal) {
         addModal.style.display = "none";
     }
+}
+//delete
+function confirmDelete() {
+    return confirm("Are you sure that you want to delete this user?");
 }
 
 
