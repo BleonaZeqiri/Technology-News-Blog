@@ -33,14 +33,12 @@ $result = $conn->query($sql);
         <div class="header-row">
           <div class="header-info-left">
             <ul>
-              <li>
-                <img src="images/home/header_icon1.png" alt="" />34ºc, Sunny
-              </li>
-              <li>
-                <img src="images/home/header_icon2.png" alt="" />Tuesday, 18th
-                June, 2019
-              </li>
-            </ul>
+           
+  <li>
+    <span id="currentDate"></span>
+  </li>
+</ul>
+
           </div>
           <div class="header-info-right">
             <ul class="header-social">
@@ -83,12 +81,7 @@ $result = $conn->query($sql);
               <li><a href="admin/index.php">  Login</a></li>
 
             </ul>
-            <div class="header-right-btn">
-              <div class="search-box">
-                <input type="text" placeholder="Search" />
-                <i class="fas fa-search special-tag"></i>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -122,6 +115,7 @@ $result = $conn->query($sql);
         <button class="nav-btn next">&#10095;</button>
     </div>
 </section>
+
 
     <footer class="footer">
       <div class="container">
@@ -231,45 +225,42 @@ $result = $conn->query($sql);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <script >
-      $(document).ready(function () {
-  let currentIndex = 0;
-  const items = $(".slider .item");
-  const totalItems = items.length;
-  const itemWidth = $(".item").outerWidth(true);
-  const slider = $(".slider");
+$(document).ready(function () {
+    let currentIndex = 0;
+    const items = $(".slider .item");
+    const totalItems = items.length;
+    const itemWidth = $(".item").outerWidth(true);
+    const slider = $(".slider");
 
-  function updateSlider() {
-    let newTransformValue = -currentIndex * itemWidth;
-    slider.css("transform", `translateX(${newTransformValue}px)`);
-  }
-
-  $(".next").click(function () {
-    if (currentIndex < totalItems - 1) {
-      currentIndex++;
-    } else {
-      currentIndex = 0; 
+    function updateSlider() {
+        let newTransformValue = -currentIndex * itemWidth; 
+        slider.css("transform", `translateX(${newTransformValue}px)`);
     }
-    updateSlider();
-  });
 
-  $(".prev").click(function () {
-    if (currentIndex > 0) {
-      currentIndex--;
-    } else {
-      currentIndex = totalItems - 1; 
-    }
-    updateSlider();
-  });
+    $(".next").click(function () {
+        if (currentIndex + 3 < totalItems) {
+            currentIndex += 3; 
+        } else {
+            currentIndex = 0; 
+        }
+        updateSlider();
+    });
 
-  $(".slider .item").click(function () {
-    $(".slider .item").removeClass("active");
-    $(this).addClass("active");
-  });
+    $(".prev").click(function () {
+        if (currentIndex >= 3) {
+            currentIndex -= 3; 
+        } else {
+            currentIndex = totalItems - (totalItems % 3); 
+        }
+        updateSlider();
+    });
 
-  setInterval(function () {
-    $(".next").click();
-  }, 4000);
+    setInterval(function () {
+        $(".next").click();
+    }, 8000);
 });
+
+
 
     </script>
 

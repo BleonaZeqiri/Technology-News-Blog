@@ -35,16 +35,12 @@ $result = $conn->query($sql);
           </div>
           <div class="header-info-right">
             <ul class="header-social">
-              <li>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-              </li>
-              <li>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-              </li>
-              <li>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-              </li>
-            </ul>
+          
+  <li>
+    <span id="currentDate"></span>
+  </li>
+</ul>
+
           </div>
         </div>
       </div>
@@ -73,12 +69,7 @@ $result = $conn->query($sql);
               <li><a href="contact-us.php"> Contact Us</a></li>
               <li><a href="admin/index.php">  Login</a></li>
             </ul>
-            <div class="header-right-btn">
-              <div class="search-box">
-                <input type="text" placeholder="Search" />
-                <i class="fas fa-search special-tag"></i>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -96,7 +87,6 @@ $result = $conn->query($sql);
           <div class="portrait-right">
             <div class="portrait-cards">
               <?php
-              // Check if posts are available
               if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                   echo '<a href="single-page.php?id=' . $row['id'] . '">

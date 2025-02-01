@@ -52,6 +52,10 @@ $result = $stmt->get_result();
             <h3>Articles</h3>
         </a>
       
+        <a href="news.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>">
+            <img src="images/images/article.svg" class="nav-img" >
+            <h3>News</h3>
+        </a>
      
         <a href="logout.php" class="nav-option">
             <img src="images/images/logout.svg" class="nav-img" >

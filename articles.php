@@ -27,15 +27,13 @@ $result2 = $conn->query($sql2);
       <div class="container">
         <div class="header-row">
           <div class="header-info-left">
-            <ul>
-              <li>
-                <img src="images/home/header_icon1.png" alt="" />34ºc, Sunny
-              </li>
-              <li>
-                <img src="images/home/header_icon2.png" alt="" />Tuesday, 18th
-                June, 2019
-              </li>
-            </ul>
+          <ul>
+
+  <li>
+    <span id="currentDate"></span>
+  </li>
+</ul>
+
           </div>
           <div class="header-info-right">
             <ul class="header-social">
@@ -78,12 +76,7 @@ $result2 = $conn->query($sql2);
               <li><a href="admin/index.php">  Login</a></li>
 
             </ul>
-            <div class="header-right-btn">
-              <div class="search-box">
-                <input type="text" placeholder="Search" />
-                <i class="fas fa-search special-tag"></i>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -254,6 +247,7 @@ $result2 = $conn->query($sql2);
         reserved
       </div>
     </section>
+
     <script src="main.js"></script>
   </body>
 </html>

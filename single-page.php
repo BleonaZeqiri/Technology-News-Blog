@@ -1,20 +1,22 @@
 <?php
 include '../../htdocs/Technology-News-Blog/admin/db_conn.php';
 
+// Check if 'id' is provided in the URL
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     echo "Invalid post!";
     exit;
 }
 
-$id = intval($_GET['id']); 
+$id = intval($_GET['id']); // Sanitize input
 
 $query = "SELECT news.id, news.image, news.title, news.content, users.name AS user_name 
         FROM news
         JOIN users ON news.user_id = users.id
-        WHERE news.id = $id"; 
+        WHERE news.id = $id"; // ✅ Fixed: Now filtering by the correct id
 
 $result = $conn->query($query);
 
+// Check if post exists
 if ($result->num_rows == 0) {
     echo "Post not found!";
     exit;
@@ -29,19 +31,24 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/single-page.css" />
+    <title><?php echo htmlspecialchars($row['title']); ?></title>
     <link rel="stylesheet" href="style/style.css" />
     <link rel="stylesheet" href="style/foter.css" />
-    <title><?php echo htmlspecialchars($row['title']); ?></title>
-
+    <link rel="stylesheet" href="style/single-page.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <style>
-    .image-container {
-  width: 100%;
-  height: 300px;
-  background: url("admin/<?php echo htmlspecialchars($row["image"]); ?>")
-    no-repeat center center/cover;
-  border-radius: 8px;
-}
+    
+        .image-container {
+            width: 100%;
+            height: 500px;
+            background: url('admin/<?php echo htmlspecialchars($row['image']); ?>') no-repeat center center/cover;
+            border-radius: 8px;
+            background-size: 100% 100%;
+        }
+     
     </style>
 </head>
 <body>
@@ -50,14 +57,12 @@ $conn->close();
         <div class="header-row">
           <div class="header-info-left">
             <ul>
-              <li>
-                <img src="images/home/header_icon1.png" alt="" />34ºc, Sunny
-              </li>
-              <li>
-                <img src="images/home/header_icon2.png" alt="" />Tuesday, 18th
-                June, 2019
-              </li>
-            </ul>
+            
+  <li>
+    <span id="currentDate"></span>
+  </li>
+</ul>
+
           </div>
           <div class="header-info-right">
             <ul class="header-social">
@@ -100,16 +105,12 @@ $conn->close();
               <li><a href="admin/index.php">  Login</a></li>
 
             </ul>
-            <div class="header-right-btn">
-              <div class="search-box">
-                <input type="text" placeholder="Search" />
-                <i class="fas fa-search special-tag"></i>
-              </div>
-            </div>
+          
           </div>
         </div>
       </div>
     </div>
+
     <div class="container_singlepage">
         <div class="image-container"></div>
         <div class="content">
@@ -217,5 +218,11 @@ $conn->close();
         </div>
       </div>
     </footer>
+    <section id="copy-right">
+      <div class="copy-right-sec">
+        <i class="fa-solid fa-copyright"></i> 2024 Klan Kosova - All rights
+        reserved
+      </div>
+    </section>
 </body>
 </html>

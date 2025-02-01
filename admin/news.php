@@ -1,14 +1,23 @@
+
+
 <?php
 session_start();
-include("../admin/db_conn.php");
+include("db_conn.php");
 
+if (!isset($_SESSION['id'])) {
+    header("Location: index.php");
+    exit();
+}
 
+$user_id = $_SESSION['id'];
 
-$query = "SELECT * FROM news"; 
+$query = "SELECT * FROM news WHERE user_id = ?";
 $stmt = $conn->prepare($query);
+$stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +25,8 @@ $result = $stmt->get_result();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="superadmin.css?v=1.0">
+    <link rel="stylesheet" href="css/user.css?v=1.0">
+
 
 </head>
 
@@ -24,10 +34,11 @@ $result = $stmt->get_result();
     <header>
         <div class="logosec">
             <div class="logo">TechnologyNews</div>
-            <img src="images/hamburger.svg" class="icn menuicn" id="menuicn" alt="menu-icon">
+            <img src="images/images/hamburger.svg" class="icn menuicn" id="menuicn" alt="menu-icon">
+
         </div>
         <div class="dropdown">
-            <img src="images/user.svg" class="dpicn dropbtn" alt="dp">
+            <img src="images/images/user.svg" class="dpicn dropbtn" alt="dp">
             <div class="dropdown-content" style="left:0;">
             <a href="profile.php">Profile</a>
 
@@ -38,31 +49,23 @@ $result = $stmt->get_result();
     <div class="main-container">
         <div class="navcontainer">
         <nav class="nav">
-    <div class="nav-upper-options">
-    <a href="home.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'superadmin.php' ? 'active' : ''; ?>">
-            <img src="images/home.svg" class="nav-img" alt="dashboard">
+        <div class="nav-upper-options">
+    <a href="home.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'home.php' ? 'active' : ''; ?>">
+            <img src="images/images/home.svg" class="nav-img" alt="dashboard">
             <h3 class="home">Home</h3>
         </a>
         <a href="articles.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'articles.php' ? 'active' : ''; ?>">
-            <img src="images/article.svg" class="nav-img" >
+            <img src="images/images/article.svg" class="nav-img" >
             <h3>Articles</h3>
         </a>
-        <a href="contact.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'contact.php' ? 'active' : ''; ?>">
-            <img src="images/contacts.svg" class="nav-img" >
-            <h3>Contact</h3>
-        </a>
         <a href="news.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>">
-            <img src="images/contacts.svg" class="nav-img" >
+            <img src="images/images/article.svg" class="nav-img" >
             <h3>News</h3>
         </a>
-       
-        <a href="register.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'register.php' ? 'active' : ''; ?>">
-            <img src="images/user.svg" class="nav-img" >
-            <h3>Register</h3>
-        </a>
-        <a href="../admin/logout.php"  class="nav-option">
-            <img src="images/logout.svg" class="nav-img" >
-            <h3>Logout</h3>
+     
+        <a href="logout.php" class="nav-option">
+            <img src="images/images/logout.svg" class="nav-img" >
+            <h3 >Logout</h3>
         </a>
     </div>
 </nav>
@@ -73,7 +76,7 @@ $result = $stmt->get_result();
             
             <div class="report-container">
             <div class="report-header">
-                    <h1 class="recent-Articles">Recent News</h1>
+                    <h1 class="recent-Articles">Recent Articles</h1>
                     <button class="view" id="myBtn">Add</button>
                 </div>
                 
@@ -107,23 +110,24 @@ $result = $stmt->get_result();
                 <thead>
                     <tr class="report-topic-heading">
                         <th class="t-op">Id</th>
-                        <th class="t-op">user_id</th>
 
-                        <th class="t-op">image</th>
                         <th class="t-op">title</th>
                         <th class="t-op">content</th>
-                        <th class="t-op">Created</th>
+                        <th class="t-op">image</th>
+
+
 
                         <th class="t-op">Edit</th>
-
                         <th class="t-op">Delete</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <?php while ($row = $result->fetch_assoc()): ?>
+                        <?php while ($row = $result->fetch_assoc()): ?>
                             <tr>
                                 <td><?php echo htmlspecialchars($row['id']); ?></td>
-                                <td><?php echo htmlspecialchars($row['user_id']); ?></td>
+
+                                <td><?php echo htmlspecialchars($row['title']); ?></td>
+                                <td><?php echo htmlspecialchars($row['content']); ?></td>
                                 <td>
                                     <?php if (!empty($row['image'])): ?>
                                         <img src="<?php echo htmlspecialchars($row['image']); ?>" alt="Post Image" width="100" height="100">
@@ -131,10 +135,6 @@ $result = $stmt->get_result();
                                         No image uploaded
                                     <?php endif; ?>
                                 </td>
-                                <td><?php echo htmlspecialchars($row['title']); ?></td>
-                                <td><?php echo htmlspecialchars($row['content']); ?></td>
-                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
-                               
                                 <td>
                                     <a href="edit_news.php?id=<?php echo $row['id']; ?>" class="button">Edit</a>
                                 </td>

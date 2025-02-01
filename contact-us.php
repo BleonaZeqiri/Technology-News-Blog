@@ -57,14 +57,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <div class="container">
         <div class="header-row">
           <div class="header-info-left">
-            <ul>
-              <li>
-                <img src="images/home/header_icon1.png" alt="" />34ºc, Sunny
-              </li>
-              <li>
-                <img src="images/home/header_icon2.png" alt="" />Tuesday, 18th
-                June, 2019
-              </li>
+            
+  <li>
+    <span id="currentDate"></span>
+  </li>
+</ul>
+
             </ul>
           </div>
           <div class="header-info-right">
@@ -108,12 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
               <li><a href="admin/index.php">  Login</a></li>
 
             </ul>
-            <div class="header-right-btn">
-              <div class="search-box">
-                <input type="text" placeholder="Search" />
-                <i class="fas fa-search special-tag"></i>
-              </div>
-            </div>
+           
           </div>
         </div>
       </div>

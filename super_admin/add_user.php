@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO users (user_name, password, name, role) VALUES ('$user_name', '$password', '$name', '$role')";
     
     if ($conn->query($sql) === TRUE) {
-        echo "New user added successfully";
+        header("Location: register.php");
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
