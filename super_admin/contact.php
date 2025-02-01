@@ -47,7 +47,7 @@ $conn->close();
             <div class="dropdown-content" style="left:0;">
             <a href="profile.php">Profile</a>
 
-                <a href="#">Logout</a>
+                <a href="../admin/logout.php">Logout</a>
             </div>
         </div>
     </header>
@@ -67,12 +67,15 @@ $conn->close();
             <img src="images/contacts.svg" class="nav-img" >
             <h3>Contact</h3>
         </a>
-       
+        <a href="news.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>">
+            <img src="images/contacts.svg" class="nav-img" >
+            <h3>News</h3>
+        </a>
         <a href="register.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'register.php' ? 'active' : ''; ?>">
             <img src="images/user.svg" class="nav-img" >
             <h3>Register</h3>
         </a>
-        <a href="/"  class="nav-option">
+        <a href="../admin/logout.php"  class="nav-option">
             <img src="images/logout.svg" class="nav-img" >
             <h3>Logout</h3>
         </a>

@@ -31,7 +31,7 @@ $result = $stmt->get_result();
             <img src="images/user.svg" class="dpicn dropbtn" alt="user-profile">
             <div class="dropdown-content">
                 <a href="profile.php">Profile</a>
-                <a href="logout.php">Logout</a>
+                <a href="../admin/logout.php">Logout</a>
             </div>
         </div>
     </header>
@@ -52,11 +52,15 @@ $result = $stmt->get_result();
                         <img src="images/contacts.svg" class="nav-img" alt="contact">
                         <h3>Contact</h3>
                     </a>
+                    <a href="news.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>">
+            <img src="images/contacts.svg" class="nav-img" >
+            <h3>News</h3>
+        </a>
                     <a href="register.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'register.php' ? 'active' : ''; ?>">
                         <img src="images/user.svg" class="nav-img" alt="register">
                         <h3>Register</h3>
                     </a>
-                    <a href="logout.php" class="nav-option">
+                    <a href="../admin/logout.php" class="nav-option">
                         <img src="images/logout.svg" class="nav-img" alt="logout">
                         <h3>Logout</h3>
                     </a>

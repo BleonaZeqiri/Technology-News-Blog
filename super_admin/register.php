@@ -20,7 +20,7 @@
             <div class="dropdown-content" style="left:0;">
             <a href="profile.php">Profile</a>
 
-                <a href="#">Logout</a>
+                <a href="../admin/logout.php">Logout</a>
             </div>
         </div>
     </header>
@@ -45,7 +45,7 @@
             <img src="images/user.svg" class="nav-img" >
             <h3>Register</h3>
         </a>
-        <a href="/"  class="nav-option">
+        <a href="../admin/logout.php"  class="nav-option">
             <img src="images/logout.svg" class="nav-img" >
             <h3>Logout</h3>
         </a>

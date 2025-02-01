@@ -43,7 +43,7 @@ $result = $stmt->get_result();
         <div class="navcontainer">
         <nav class="nav">
     <div class="nav-upper-options">
-    <a href="home.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'superadmin.php' ? 'active' : ''; ?>">
+    <a href="home.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'home.php' ? 'active' : ''; ?>">
             <img src="images/images/home.svg" class="nav-img" alt="dashboard">
             <h3 class="home">Home</h3>
         </a>

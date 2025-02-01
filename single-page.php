@@ -1,34 +1,51 @@
 <?php
 include '../../htdocs/Technology-News-Blog/admin/db_conn.php';
 
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    echo "Invalid post!";
+    exit;
+}
 
+$id = intval($_GET['id']); 
 
-$sql = "SELECT news.id, news.image, news.title, news.content, users.name AS user_name 
+$query = "SELECT news.id, news.image, news.title, news.content, users.name AS user_name 
         FROM news
         JOIN users ON news.user_id = users.id
-        ORDER BY news.id DESC";
+        WHERE news.id = $id"; 
 
-$result = $conn->query($sql);
+$result = $conn->query($query);
+
+if ($result->num_rows == 0) {
+    echo "Post not found!";
+    exit;
+}
+
+$row = $result->fetch_assoc();
+$conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Custom Expandable Card Slider</title>
-    <link rel="stylesheet" href="style/news.css" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/single-page.css" />
     <link rel="stylesheet" href="style/style.css" />
     <link rel="stylesheet" href="style/foter.css" />
+    <title><?php echo htmlspecialchars($row['title']); ?></title>
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-
-
-  </head>
-  <body>
-  <div class="header-top">
+    <style>
+    .image-container {
+  width: 100%;
+  height: 300px;
+  background: url("admin/<?php echo htmlspecialchars($row["image"]); ?>")
+    no-repeat center center/cover;
+  border-radius: 8px;
+}
+    </style>
+</head>
+<body>
+<div class="header-top">
       <div class="container">
         <div class="header-row">
           <div class="header-info-left">
@@ -93,36 +110,15 @@ $result = $conn->query($sql);
         </div>
       </div>
     </div>
-    <section class="game-section">
-    <div class="slider-container">
-        <button class="nav-btn prev">&#10094;</button>
-
-        <div class="slider">
-            <?php while ($row = $result->fetch_assoc()): ?>
-                <div class="item" onclick="window.location.href='single-page.php?id=<?php echo $row['id']; ?>'">
-                    <?php if (!empty($row['image'])): ?>
-                        <img src="admin/<?php echo htmlspecialchars($row['image']); ?>" alt="Post Image" style="width:100%; height:100%;" />
-                    <?php endif; ?>
-                    <div class="item-desc">
-                        <h3><?php echo htmlspecialchars($row['title']); ?></h3>
-                        <p>
-                            <?php 
-                                $content = htmlspecialchars($row['content']);
-                                echo (strlen($content) > 35) ? substr($content, 0, 35) . "..." : $content;
-                            ?>
-                        </p>
-                        <p>Posted by: <?php echo htmlspecialchars($row['user_name']); ?></p>
-                    </div>
-                </div>
-            <?php endwhile; ?>
+    <div class="container_singlepage">
+        <div class="image-container"></div>
+        <div class="content">
+            <h1><?php echo htmlspecialchars($row['title']); ?></h1>
+            <p class="author">Posted by: <?php echo htmlspecialchars($row['user_name']); ?></p>
+            <p><?php echo nl2br(htmlspecialchars($row['content'])); ?></p>
+            <a href="news.php" class="back-btn">⬅ Back to news</a>
         </div>
-
-        <?php $conn->close(); ?>
-
-        <button class="nav-btn next">&#10095;</button>
     </div>
-</section>
-
     <footer class="footer">
       <div class="container">
         <div class="row">
@@ -221,57 +217,5 @@ $result = $conn->query($sql);
         </div>
       </div>
     </footer>
-    <section id="copy-right">
-      <div class="copy-right-sec">
-        <i class="fa-solid fa-copyright"></i> 2024 Klan Kosova - All rights
-        reserved
-      </div>
-    </section>
- 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-    <script >
-      $(document).ready(function () {
-  let currentIndex = 0;
-  const items = $(".slider .item");
-  const totalItems = items.length;
-  const itemWidth = $(".item").outerWidth(true);
-  const slider = $(".slider");
-
-  function updateSlider() {
-    let newTransformValue = -currentIndex * itemWidth;
-    slider.css("transform", `translateX(${newTransformValue}px)`);
-  }
-
-  $(".next").click(function () {
-    if (currentIndex < totalItems - 1) {
-      currentIndex++;
-    } else {
-      currentIndex = 0; 
-    }
-    updateSlider();
-  });
-
-  $(".prev").click(function () {
-    if (currentIndex > 0) {
-      currentIndex--;
-    } else {
-      currentIndex = totalItems - 1; 
-    }
-    updateSlider();
-  });
-
-  $(".slider .item").click(function () {
-    $(".slider .item").removeClass("active");
-    $(this).addClass("active");
-  });
-
-  setInterval(function () {
-    $(".next").click();
-  }, 4000);
-});
-
-    </script>
-
-  </body>
+</body>
 </html>
