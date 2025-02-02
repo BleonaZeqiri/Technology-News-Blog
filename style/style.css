@@ -204,8 +204,8 @@ a {
   gap: 10px;
 }
 .portrait-news-image {
-  width: 50%;
-  height: auto;
+  width: 30%;
+  height: 51%;
 }
 .portrait-news-content p {
   font-size: 13px;

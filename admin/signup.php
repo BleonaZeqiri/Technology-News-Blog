@@ -98,5 +98,26 @@
         reserved
       </div>
     </section>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector("form").addEventListener("submit", function (event) {
+        const password = document.querySelector("input[name='password']").value;
+        const rePassword = document.querySelector("input[name='re_password']").value;
+        
+        const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[\/!])[A-Za-z\d\/!]{6,}$/;
+        
+        if (!passwordPattern.test(password)) {
+            alert("Password must be at least 6 characters long and include at least one letter, one number, and one special character (/ or !). ");
+            event.preventDefault(); 
+            return;
+        }
+        
+        if (password !== rePassword) {
+            alert("Passwords do not match!");
+            event.preventDefault(); 
+        }
+    });
+});
+    </script>
 </body>
 </html>

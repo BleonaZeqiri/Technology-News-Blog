@@ -21,9 +21,8 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
         header("Location: index.php?error=Password is required");
 	    exit();
 	}else{
-        $pass = md5($pass);  // You can also consider using a more secure hashing method like bcrypt.
+        $pass = md5($pass);  
 
-		// Modified query to include checking the role column
 		$sql = "SELECT * FROM users WHERE user_name='$uname' AND password='$pass'";
 
 		$result = mysqli_query($conn, $sql);
@@ -35,14 +34,13 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
             	$_SESSION['name'] = $row['name'];
             	$_SESSION['id'] = $row['id'];
 
-            	// Check if the user is an admin
             	if ($row['role'] === 'admin') {
                 	$_SESSION['role'] = 'admin';
-                	header("Location: ../super_admin/articles.php");  // Redirect to super admin home page
+                	header("Location: ../super_admin/articles.php");  
                 	exit();
             	} else {
                 	$_SESSION['role'] = 'user';
-                	header("Location: home.php");  // Redirect to user home page
+                	header("Location: home.php");  
                 	exit();
             	}
             }else{

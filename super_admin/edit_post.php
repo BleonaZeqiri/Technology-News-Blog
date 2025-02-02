@@ -42,6 +42,8 @@ if (isset($_SESSION['id']) && isset($_GET['id'])) {
     <title>Edit Post</title>
     <link rel="stylesheet" type="text/css" href="../admin/style.css">
     <link rel="stylesheet" href="../admin/css/user.css?v=1.0">
+    <link rel="stylesheet" href="style/edit.css">
+
 </head>
 <body>
     <h1>Edit Post</h1>

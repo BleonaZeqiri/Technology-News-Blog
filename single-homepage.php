@@ -1,27 +1,26 @@
 <?php
 include '../../htdocs/Technology-News-Blog/admin/db_conn.php';
 
-if (!isset($_GET['id']) || empty($_GET['id'])) {
-    echo "Invalid post!";
-    exit;
+
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $id = $_GET['id'];
+
+  
+    $stmt = $conn->prepare("SELECT * FROM posts WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $post = $result->fetch_assoc();
+
+   
+    if (!$post) {
+        echo "Post not found.";
+        exit();
+    }
+} else {
+    echo "Invalid post ID.";
+    exit();
 }
-
-$id = intval($_GET['id']); 
-
-$query = "SELECT news.id, news.image, news.title, news.content, users.name AS user_name 
-        FROM news
-        JOIN users ON news.user_id = users.id
-        WHERE news.id = $id"; 
-
-$result = $conn->query($query);
-
-if ($result->num_rows == 0) {
-    echo "Post not found!";
-    exit;
-}
-
-$row = $result->fetch_assoc();
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -29,25 +28,14 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($row['title']); ?></title>
+    <title><?php echo htmlspecialchars($post['title']); ?></title>
+    <link rel="stylesheet" href="style/single-homepage.css">
     <link rel="stylesheet" href="style/style.css" />
     <link rel="stylesheet" href="style/foter.css" />
-    <link rel="stylesheet" href="style/single-page.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-    <style>
-    
-        .image-container {
-            width: 100%;
-            height: 500px;
-            background: url('admin/<?php echo htmlspecialchars($row['image']); ?>') no-repeat center center/cover;
-            border-radius: 8px;
-            background-size: 100% 100%;
-        }
-     
-    </style>
 </head>
 <body>
 <div class="header-top">
@@ -109,14 +97,14 @@ $conn->close();
       </div>
     </div>
 
-    <div class="container_singlepage">
-        <div class="image-container"></div>
-        <div class="content">
-            <h1><?php echo htmlspecialchars($row['title']); ?></h1>
-            <p class="author">Posted by: <?php echo htmlspecialchars($row['user_name']); ?></p>
-            <p><?php echo nl2br(htmlspecialchars($row['content'])); ?></p>
-            <a href="news.php" class="back-btn">⬅ Back to news</a>
+        <div class="container-single">
+            <h1><?php echo htmlspecialchars($post['title']); ?></h1>
+            <p class="date">Published on <?php echo date("F j, Y", strtotime($post['created_at'])); ?></p>
+        <img src="admin/<?php echo htmlspecialchars($post['image']); ?>" alt="<?php echo htmlspecialchars($post['title']); ?>" class="post-image">
+        <div class="post-content">
+            <p><?php echo nl2br(htmlspecialchars($post['content'])); ?></p>
         </div>
+        <a href="index.php" class="back-button">&larr; Back to Home</a>
     </div>
     <footer class="footer">
       <div class="container">

@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit User</title>
     <link rel="stylesheet" href="superadmin.css?v=1.0">
+
 </head>
 <body>
     <div class="modal-content">
@@ -56,6 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <button type="submit">Update</button>
         </form>
+    <a href="register.php" class="button">Back to Home</a>
+
     </div>
 </body>
 </html>

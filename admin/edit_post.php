@@ -30,6 +30,8 @@ if (isset($_SESSION['id']) && isset($_GET['id'])) {
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="css/user.css?v=1.0">
     <link rel="stylesheet" href="css/user.css?v=1.0">
+    <link rel="stylesheet" href="style/edit.css">
+
 
 
 </head>

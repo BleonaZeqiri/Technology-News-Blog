@@ -89,9 +89,11 @@ $result = $conn->query($sql);
               <?php
               if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                  echo '<a href="single-page.php?id=' . $row['id'] . '">
+                  echo '<a href="single-homepage.php?id=' . $row['id'] . '">
                           <div class="portrait-card">
-                            <img class="portrait-news-image" src="admin/' . $row['image'] . '" alt="" />
+                          <div class="image" style="width:175px; height:130px;">
+                          <img class="portrait-news-image" src="admin/' . $row['image'] . '" alt=""  style="width:100%; height:100%;"/>
+                          </div>
                             <div class="portrait-news-content">
                               <h4>' . $row['title'] . '</h4>
                               <p>' . substr($row['content'], 0, 100) . '...</p>
