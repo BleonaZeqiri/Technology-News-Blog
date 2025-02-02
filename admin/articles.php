@@ -54,6 +54,10 @@ $result = $stmt->get_result();
             <img src="images/images/home.svg" class="nav-img" alt="dashboard">
             <h3 class="home">Home</h3>
         </a>
+        <a href="about_us.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'about_us.php' ? 'active' : ''; ?>">
+            <img src="images/images/article.svg" class="nav-img" >
+            <h3>About Us</h3>
+        </a>
         <a href="articles.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'articles.php' ? 'active' : ''; ?>">
             <img src="images/images/article.svg" class="nav-img" >
             <h3>Articles</h3>

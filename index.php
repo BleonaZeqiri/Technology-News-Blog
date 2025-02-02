@@ -59,6 +59,9 @@ $result = $conn->query($sql);
             <ul>
               <li><a href="index.php">Home</a></li>
               <li>
+                <a href="about-us.php">About Us</a>
+              </li>
+              <li>
                 <a href="articles.php">Articles</a>
               </li>
               <li>

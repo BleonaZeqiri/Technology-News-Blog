@@ -1,27 +1,10 @@
-<?php
+<?php 
 include '../../htdocs/Technology-News-Blog/admin/db_conn.php';
+$sql = "SELECT * FROM about_us ORDER BY created_at DESC";
+$result = $conn->query($sql);
 
-if (!isset($_GET['id']) || empty($_GET['id'])) {
-    echo "Invalid post!";
-    exit;
-}
 
-$id = intval($_GET['id']); 
 
-$query = "SELECT news.id, news.image, news.title, news.content, users.name AS user_name 
-        FROM news
-        JOIN users ON news.user_id = users.id
-        WHERE news.id = $id"; 
-
-$result = $conn->query($query);
-
-if ($result->num_rows == 0) {
-    echo "Post not found!";
-    exit;
-}
-
-$row = $result->fetch_assoc();
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -29,33 +12,27 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($row['title']); ?></title>
+    <title>About Us - Technology Company</title>
+    <link rel="stylesheet" href="style/about-us.css?v=1.0">
+   
     <link rel="stylesheet" href="style/style.css" />
     <link rel="stylesheet" href="style/foter.css" />
-    <link rel="stylesheet" href="style/single-page.css" />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-    <style>
-    
-        .image-container {
-            width: 100%;
-            height: 500px;
-            background: url('admin/<?php echo htmlspecialchars($row['image']); ?>') no-repeat center center/cover;
-            border-radius: 8px;
-            background-size: 100% 100%;
-        }
-     
-    </style>
+
 </head>
+
 <body>
+
 <div class="header-top">
       <div class="container">
         <div class="header-row">
-          <div class="header-info-left">
-            <ul>
-            
+        <div class="header-info-left">
+          <ul>
+
   <li>
     <span id="currentDate"></span>
   </li>
@@ -106,21 +83,57 @@ $conn->close();
               <li><a href="admin/index.php">  Login</a></li>
 
             </ul>
-          
+            
           </div>
         </div>
       </div>
     </div>
 
-    <div class="container_singlepage">
-        <div class="image-container"></div>
-        <div class="content">
-            <h1><?php echo htmlspecialchars($row['title']); ?></h1>
-            <p class="author">Posted by: <?php echo htmlspecialchars($row['user_name']); ?></p>
-            <p><?php echo nl2br(htmlspecialchars($row['content'])); ?></p>
-            <a href="news.php" class="back-btn">⬅ Back to news</a>
+    <section class="about-us">
+        <div class="container">
+        <div class="section dynamic-content">
+            <?php if ($result->num_rows > 0): ?>
+                <?php 
+              
+                while($row = $result->fetch_assoc()) {
+                    echo "<div class='content-item'>";
+                    echo "<h2>" . htmlspecialchars($row['title']) . "</h2>";
+                    echo "<p>" . nl2br(htmlspecialchars($row['content'])) . "</p>";
+                    echo "</div>";
+                }
+                ?>
+            <?php else: ?>
+                <p>No additional content available at the moment.</p>
+            <?php endif; ?>
         </div>
-    </div>
+         
+
+        </div>
+    </section>
+
+    <section class="core-technologies">
+        <div class="container">
+     
+            <div class="tech-list">
+                <div class="tech-item">
+                    <h3>Artificial Intelligence (AI)</h3>
+                    <p>AI is the cornerstone of many of our products. We use machine learning to improve efficiency and provide intelligent solutions that anticipate needs.</p>
+                </div>
+                <div class="tech-item">
+                    <h3>Blockchain</h3>
+                    <p>We implement blockchain technology to ensure secure, decentralized, and transparent transactions that are reliable for all users.</p>
+                </div>
+                <div class="tech-item">
+                    <h3>Cloud Computing</h3>
+                    <p>Our cloud-based solutions allow businesses to scale rapidly and access their data securely from anywhere in the world.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+   
     <footer class="footer">
       <div class="container">
         <div class="row">
@@ -169,10 +182,10 @@ $conn->close();
             </div>
           </div>
           <div class="col-md-3">
-            <div class="social-links">
+            <div class="social-links" >
               <h2>Follow Us</h2>
               <img src="./assets/images/about/home_line.png" alt="" />
-              <div class="social-icons">
+              <div class="social-icons" >
                 <li>
                   <a href=""><i class="fa-brands fa-twitter"></i> Twitter</a>
                 </li>
@@ -225,7 +238,49 @@ $conn->close();
         reserved
       </div>
     </section>
+ 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="main.js"></script>
+
+    <script >
+$(document).ready(function () {
+    let currentIndex = 0;
+    const items = $(".slider .item");
+    const totalItems = items.length;
+    const itemWidth = $(".item").outerWidth(true);
+    const slider = $(".slider");
+
+    function updateSlider() {
+        let newTransformValue = -currentIndex * itemWidth; 
+        slider.css("transform", `translateX(${newTransformValue}px)`);
+    }
+
+    $(".next").click(function () {
+        if (currentIndex + 3 < totalItems) {
+            currentIndex += 3; 
+        } else {
+            currentIndex = 0; 
+        }
+        updateSlider();
+    });
+
+    $(".prev").click(function () {
+        if (currentIndex >= 3) {
+            currentIndex -= 3; 
+        } else {
+            currentIndex = totalItems - (totalItems % 3); 
+        }
+        updateSlider();
+    });
+
+    setInterval(function () {
+        $(".next").click();
+    }, 8000);
+});
+
+
+
+    </script>
 
 </body>
 </html>

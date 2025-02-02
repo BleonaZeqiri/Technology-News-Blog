@@ -137,6 +137,9 @@ $result1 = $conn->query($sql1);
             <ul>
               <li><a href="index.php">Home</a></li>
               <li>
+                <a href="about-us.php">About Us</a>
+              </li>
+              <li>
                 <a href="articles.php">Articles</a>
               </li>
               <li>
@@ -190,7 +193,6 @@ $result1 = $conn->query($sql1);
 
         <p class="news-description"><?php echo htmlspecialchars($row['content']); ?></p>
 
-        <!-- Read More Link with Dynamic ID -->
         <a href="single-pagenews.php?id=<?php echo $row['id']; ?>" class="read-more">Read More</a>
       <?php else: ?>
         <div class="card">
@@ -205,7 +207,9 @@ $result1 = $conn->query($sql1);
 
 
     <section class="game-section">
+
     <div class="slider-container">
+
         <button class="nav-btn prev">&#10094;</button>
 
         <div class="slider">

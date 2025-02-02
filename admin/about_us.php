@@ -1,4 +1,5 @@
 
+
 <?php
 session_start();
 include("db_conn.php");
@@ -10,7 +11,7 @@ if (!isset($_SESSION['id'])) {
 
 $user_id = $_SESSION['id'];
 
-$query = "SELECT * FROM posts WHERE user_id = ?";
+$query = "SELECT * FROM about_us WHERE user_id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -26,6 +27,7 @@ $result = $stmt->get_result();
     <title>Dashboard</title>
     <link rel="stylesheet" href="css/user.css?v=1.0">
 
+
 </head>
 
 <body>
@@ -33,19 +35,21 @@ $result = $stmt->get_result();
         <div class="logosec">
             <div class="logo">TechnologyNews</div>
             <img src="images/images/hamburger.svg" class="icn menuicn" id="menuicn" alt="menu-icon">
+
         </div>
         <div class="dropdown">
             <img src="images/images/user.svg" class="dpicn dropbtn" alt="dp">
             <div class="dropdown-content" style="left:0;">
-                <a href="profile.php">Profile</a>
-                <a href="logout.php">Logout</a>
+            <a href="profile.php">Profile</a>
+
+                <a href="../admin/logout.php">Logout</a>
             </div>
         </div>
     </header>
     <div class="main-container">
         <div class="navcontainer">
         <nav class="nav">
-    <div class="nav-upper-options">
+        <div class="nav-upper-options">
     <a href="home.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'home.php' ? 'active' : ''; ?>">
             <img src="images/images/home.svg" class="nav-img" alt="dashboard">
             <h3 class="home">Home</h3>
@@ -58,28 +62,89 @@ $result = $stmt->get_result();
             <img src="images/images/article.svg" class="nav-img" >
             <h3>Articles</h3>
         </a>
+      
         <a href="news.php" class="nav-option <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>">
             <img src="images/images/article.svg" class="nav-img" >
             <h3>News</h3>
         </a>
      
-    
-        <a href="logout.php"  class="nav-option">
+        <a href="logout.php" class="nav-option">
             <img src="images/images/logout.svg" class="nav-img" >
-            <h1 >Logout</h1>
+            <h3 >Logout</h3>
         </a>
-  
-      
     </div>
 </nav>
 
+
         </div>
-        <div class="profile">
-        <img src="images/images/user.svg">
-        <br>
-        <h1>Welcome, <?php echo $_SESSION['user_name']; ?></h1>
+        <div class="main">
+            
+            <div class="report-container">
+            <div class="report-header">
+                    <h1 class="recent-Articles">Recent Articles</h1>
+                    <button class="view" id="myBtn">Add</button>
+                </div>
+                
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2 class="h2_add">Add a New Article</h2>
+                        <form action="process_about_us.php" method="POST" enctype="multipart/form-data">
+                            <div class="input">
+                                <label for="title">Article Title</label>
+                                <input type="text" name="title" id="title" required>
+                            </div>
+                            <div class="input">
+                                <label for="content">Article Content</label>
+                                <textarea name="content" id="content" rows="4" required></textarea>
+                            </div>
+                          
+                            <button type="submit" name="action" value="create" class="button">Add</button>
+                        </form>
+                  
+
+                    </div>
+                </div>
+                
+
+                
+                <table class="report-body">
+                <thead>
+                    <tr class="report-topic-heading">
+                        <th class="t-op">Id</th>
+
+                        <th class="t-op">title</th>
+                        <th class="t-op">content</th>
+
+
+
+                        <th class="t-op">Edit</th>
+                        <th class="t-op">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($row['id']); ?></td>
+
+                                <td><?php echo htmlspecialchars($row['title']); ?></td>
+                                <td><?php echo htmlspecialchars($row['content']); ?></td>
+                              
+                                <td>
+                                    <a href="edit_about_us.php?id=<?php echo $row['id']; ?>" class="button">Edit</a>
+                                </td>
+                                <td>
+                                    <form action="process_about_us.php" method="POST" style="display:inline;">
+                                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                        <button type="submit" name="action" value="delete" class="button delete" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
-  
     </div>
     <script>
         var modal = document.getElementById("myModal");

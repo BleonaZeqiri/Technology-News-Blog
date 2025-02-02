@@ -82,6 +82,9 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             <ul>
               <li><a href="index.php">Home</a></li>
               <li>
+                <a href="about-us.php">About Us</a>
+              </li>
+              <li>
                 <a href="articles.php">Articles</a>
               </li>
               <li>
