@@ -24,9 +24,7 @@ $result = $conn->query($sql);
         <div class="header-row">
           <div class="header-info-left">
             <ul>
-              <li>
-                <img src="images/home/header_icon1.png" alt="" />34ºc, Sunny
-              </li>
+           
               <li>
                 <div id="currentDate"></div>
               </li>

@@ -104,7 +104,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         <div class="post-content">
             <p><?php echo nl2br(htmlspecialchars($post['content'])); ?></p>
         </div>
-        <a href="index.php" class="back-button">&larr; Back to Home</a>
+        <a href="news.php" class="back-button">&larr; Back to News</a>
     </div>
     <footer class="footer">
       <div class="container">

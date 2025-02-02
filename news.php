@@ -8,15 +8,20 @@ $sql = "SELECT news.id, news.image, news.title, news.content, users.name AS user
         JOIN users ON news.user_id = users.id
         ORDER BY news.id DESC";
 
+$sql1 = "SELECT * FROM posts ORDER BY created_at DESC";
+
 $result = $conn->query($sql);
+$result1 = $conn->query($sql1);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Custom Expandable Card Slider</title>
+    <title>News</title>
     <link rel="stylesheet" href="style/news.css" />
+
     <link rel="stylesheet" href="style/style.css" />
     <link rel="stylesheet" href="style/foter.css" />
 
@@ -27,13 +32,73 @@ $result = $conn->query($sql);
 
 
   </head>
+<style>
+.news {
+  padding: 40px;
+  background-color: #f4f4f4;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.news-header h2 {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.news-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.news-item {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.news-item h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.news-date {
+  font-size: 14px;
+  color: #808080;
+  margin-bottom: 15px;
+}
+
+.news-description {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.read-more {
+  text-decoration: none;
+  color: #0d4058;
+  font-weight: bold;
+}
+
+.read-more:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .news-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+</style>
   <body>
   <div class="header-top">
       <div class="container">
         <div class="header-row">
-          <div class="header-info-left">
-            <ul>
-           
+        <div class="header-info-left">
+          <ul>
+
   <li>
     <span id="currentDate"></span>
   </li>
@@ -86,6 +151,59 @@ $result = $conn->query($sql);
         </div>
       </div>
     </div>
+    <section class="news">
+  <div class="news-header">
+    <h2>Latest News</h2>
+  </div>
+  <div class="news-content">
+    <?php
+    $sql1 = "SELECT * FROM posts ORDER BY created_at DESC LIMIT 2";
+    $result1 = $conn->query($sql1);
+    ?>
+    
+    <article class="news-item">
+      <?php if ($result1->num_rows > 0): ?>
+        <?php 
+        $row = $result1->fetch_assoc();
+        ?>
+        <h3><?php echo htmlspecialchars($row['title']); ?></h3>
+        <p class="news-date"><?php echo date('F j, Y', strtotime($row['updated_at'])); ?></p>
+
+        <p class="news-description"><?php echo htmlspecialchars($row['content']); ?></p>
+        
+        <a href="single-pagenews.php?id=<?php echo $row['id']; ?>" class="read-more">Read More</a>
+      <?php else: ?>
+        <div class="card">
+          <h2>No posts available</h2>
+          <p>There are no articles to display at the moment. Please check back later.</p>
+        </div>
+      <?php endif; ?>
+    </article>
+    
+    <article class="news-item">
+      <?php if ($result1->num_rows > 1): ?>
+        <?php 
+        $row = $result1->fetch_assoc();
+        ?>
+        <h3><?php echo htmlspecialchars($row['title']); ?></h3>
+        <p class="news-date"><?php echo date('F j, Y', strtotime($row['updated_at'])); ?></p>
+
+        <p class="news-description"><?php echo htmlspecialchars($row['content']); ?></p>
+
+        <!-- Read More Link with Dynamic ID -->
+        <a href="single-pagenews.php?id=<?php echo $row['id']; ?>" class="read-more">Read More</a>
+      <?php else: ?>
+        <div class="card">
+          <h2>No posts available</h2>
+          <p>There are no articles to display at the moment. Please check back later.</p>
+        </div>
+      <?php endif; ?>
+    </article>
+</div>
+
+</section>
+
+
     <section class="game-section">
     <div class="slider-container">
         <button class="nav-btn prev">&#10094;</button>
@@ -223,6 +341,7 @@ $result = $conn->query($sql);
     </section>
  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="main.js"></script>
 
     <script >
 $(document).ready(function () {
