@@ -13,13 +13,13 @@ if (isset($_SESSION['id'])) {
             $title = $_POST['title'];
             $content = $_POST['content'];
 
-            // No image handling needed, so we don't set an image path
+           
             $query = "INSERT INTO about_us (user_id, title, content) VALUES (?, ?, ?)";
             $stmt = $conn->prepare($query);
             $stmt->bind_param("iss", $user_id, $title, $content);
 
             if ($stmt->execute()) {
-                header("Location: articles.php?success=Post created successfully");
+                header("Location: about_us.php?success=Post created successfully");
                 exit();
             } else {
                 echo "Error: " . $stmt->error;
@@ -42,7 +42,7 @@ if (isset($_SESSION['id'])) {
             }
 
             if ($stmt->execute()) {
-                header("Location: articles.php?success=Post updated successfully");
+                header("Location: about_us.php?success=Post updated successfully");
                 exit();
             } else {
                 echo "Error: " . $stmt->error;
@@ -63,7 +63,7 @@ if (isset($_SESSION['id'])) {
             }
 
             if ($stmt->execute()) {
-                header("Location: articles.php?success=Post deleted successfully");
+                header("Location: about_us.php?success=Post deleted successfully");
                 exit();
             } else {
                 echo "Error deleting post: " . $stmt->error;
